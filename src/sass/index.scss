@@ -1,2 +1,18 @@
+// utils
+@import './utils/reset';
+@import './utils/variables';
+@import './utils/visually-hidden';
+@import './utils/mixin';
+@import './base/is-hidden';
+@import './base/no-skroll';
+
+// compinents
+@import './components/container';
+
+// common
 @import './common';
-@import './example';
+
+// layout
+@import './layout/header';
+@import './layout/gallery';
+@import './layout/footer';
