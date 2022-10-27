@@ -1,5 +1,22 @@
-<header class="header">
-  <div class="container">
-    <h1>header-queue</h1>
+<header class="films-header films-header--library">
+  <div class="films-header__wrap container">
+    <div class="films-header__nav-wrap">
+      <a href="" class="films-header__link"><svg class="films-header__icon"
+        width="24" height="24"><use href="./img/symbol-defs.svg#icon-film"></use>
+        </svg>
+        <span class="films-header__logo">Filmoteka</span></a>
+       <nav class="films-header__nav">
+        <ul class="films-header__nav-list">
+          <li class="films-header__nav-item"><a href="./index.html" class="films-header__nav-link">home</a></li>
+          <li class="films-header__nav-item"><a href="" class="films-header__nav-link films-header__nav-link--current">my library</a></li>
+        </ul>
+       </nav>
+    </div>
+    <div class="films-header__button-wrap">
+      <button type="button" class="films-header__button">watched</button>
+      <button type="button" class="films-header__button films-header__button-right">queue</button>
+    </div>
+
+
   </div>
 </header>
