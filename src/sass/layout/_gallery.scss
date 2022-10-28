@@ -8,19 +8,19 @@
 // }
 
 .gallery__item {
-    font: 15px sans-serif;
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-    justify-content: center;
+  font: 15px sans-serif;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .card {
-    border: 1px solid black;
-  
+  border: 1px solid black;
 }
-.card:hover, .card:focus{
-    color: gray;
+.card:hover,
+.card:focus {
+  color: gray;
 }
 // .film_info {
 // }
