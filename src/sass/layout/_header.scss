@@ -1,0 +1,136 @@
+.films-header {
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.films-header--home {
+    background-image: url('../img/abstract-background-with-red-lines\ 1.jpg');
+
+@include retina {
+    background-image: url('../img/abstract-background-with-red-lines\ 1@2x.jpg');
+}
+}
+
+.films-header--library {
+    background-image: url('../img/Rectangle\ 1.jpg');
+    text-align: center;
+    @include retina {
+        background-image: url('../img/Rectangle\ 1@2x.jpg');
+    }
+}
+.films-header__wrap {
+    padding-top: 40px;
+    padding-bottom: 92px;
+    max-width: 1200px;
+    margin: 0 auto;
+  
+
+}
+
+.films-header__logo {
+    color: var(--color-background-footer);
+    font-weight: 500;
+    font-size: 30px;
+    line-height: calc(35 / 30);
+    margin-left: 8px;
+    display: none;
+}
+
+.films-header__nav-wrap {
+    display: flex;
+    margin-bottom: 60px;
+}
+
+
+.films-header__nav {
+    margin-left: auto;
+}
+
+.films-header__nav-list {
+    display: flex;
+}
+
+.films-header__nav-item + .films-header__nav-item {
+    margin-left: 39px;
+}
+
+.films-header__nav-link {
+    position: relative;
+    padding: 15px 0 6px;
+font-weight: 500;
+font-size: 12px;
+line-height: calc(14 / 12);
+text-transform: uppercase;
+color:var(--color-text-white);
+
+}
+
+.films-header__nav-link--current::after  {
+    content: '';
+        position: absolute;
+        left: 0;
+        bottom: -1px;
+        width: 100%;
+        height: 3px;
+        background: var(--color-red);
+      }
+
+
+.films-header__search-form {
+    position: relative;
+    max-width: 336px;
+    margin: 0 auto;
+    border-bottom:0.5px solid #fff;
+
+}
+
+.films-header__input {
+  min-width: 280px;
+    padding: 0 0 4px; 
+
+background: rgba(232, 225, 225, 0);
+border: none;
+color: var(--color-text-white);
+&:focus {
+    outline: none;
+    &::placeholder {
+        color: rgba(248, 248, 248, 0);
+    }
+}
+}
+
+.films-header__input::placeholder {
+line-height: 16px;
+color: var(--color-text-white);
+}
+
+.films-header__search-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+    background-color: rgba(239, 230, 230, 0);
+    border: none;
+}
+
+.films-header__button {
+    padding: 14px;
+    min-width: 120px;
+    
+        font-weight: 500;
+    font-size: 12px;
+    line-height: calc(16 / 12);
+    color: #fff;
+    border: 1px solid #fff;
+    border-radius: 5px;
+        text-transform: uppercase;
+    
+        background: #f6f1f101;
+    }
+    
+        .films-header__button-right {
+            margin-left: 20px;
+        }
+    
