@@ -1,17 +1,42 @@
 .films-header {
-
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
+
+    font-family: 'Roboto';
+
 }
 
 .films-header--home {
-    background-image: url('../img/abstract-background-with-red-lines\ 1.jpg');
+
+background-image: url('../img/abstract-background-with-red-lines\ 1.jpg');
 
 @include retina {
     background-image: url('../img/abstract-background-with-red-lines\ 1@2x.jpg');
 }
+
+@include tablet {
+    background-image: url('../img/Tb_abstract-background-with-red-lines\ 1.jpg');
+    @include retina {
+        background-image: url('../img/Tb_abstract-background-with-red-lines\ 1@2x.jpg');
+    }
 }
+
+@include desktop {
+    background-image: url('../img/Ds_abstract-background-with-red-lines\ 1.jpg');
+    @include retina {
+        background-image: url('../img/Ds_abstract-background-with-red-lines\ 1@2x.jpg');
+    }
+}
+
+@media screen and (min-width: 1600px) {
+    background-image: url('../img/abstract-background-with-red-lines\ 1@2x.jpg');
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+}
+
 
 .films-header--library {
     background-image: url('../img/Rectangle\ 1.jpg');
@@ -19,15 +44,60 @@
     @include retina {
         background-image: url('../img/Rectangle\ 1@2x.jpg');
     }
+    @include tablet {
+        background-image: url('../img/Tb_Rectangle\ 1.jpg');
+        @include retina {
+            background-image: url('../img/Tb_Rectangle\ 1@2x.jpg');
+        }
+    }
+    @include desktop {
+        background-image: url('../img/Ds_Rectangle\ 1.jpg');
+        @include retina {
+            background-image: url('../img/Ds_Rectangle\ 1@2x.jpg');
+        }
+    }
+
+    @media screen and (min-width: 1600px) {
+        background-image: url('../img/Rectangle\ 1@3x.jpg');
+        background-repeat: repeat;
+        background-size: contain;
+    }
 }
+
 .films-header__wrap {
-    padding-top: 40px;
-    padding-bottom: 92px;
-    max-width: 1200px;
+  
+    max-width: 100%;
+    padding: 10px;
+
     margin: 0 auto;
+
+@media screen and(min-width: 320px) {
+width: 320px;
+
+    padding-top: 40px;
+padding-bottom: 92px;
+    padding-left: 20px;
+    padding-right: 22px;
+ 
+}
+ @include mobile {
+   width: 480px;     
+      }
+    
+      @include tablet {
+        width: 768px;
+        padding-left: 32px;
+        padding-right: 32px;
+        padding-bottom: 80px;
+        }
+    
+      @include desktop {
+        width: 1220px;
+      }
+    }
   
 
-}
+
 
 .films-header__logo {
     color: var(--color-background-footer);
@@ -35,7 +105,10 @@
     font-size: 30px;
     line-height: calc(35 / 30);
     margin-left: 8px;
-    display: none;
+    @media screen and (max-width: 480px) {
+        display: none;
+    }
+   
 }
 
 .films-header__nav-wrap {
@@ -53,8 +126,12 @@
 }
 
 .films-header__nav-item + .films-header__nav-item {
-    margin-left: 39px;
-}
+    margin-left: 10px;
+    @media screen and(min-width: 320px) {
+        margin-left: 39px;
+    }
+    }
+   
 
 .films-header__nav-link {
     position: relative;
@@ -80,14 +157,20 @@ color:var(--color-text-white);
 
 .films-header__search-form {
     position: relative;
-    max-width: 336px;
+    @media screen and (max-width: 767.98px) {
+       max-width: 336px; 
+    }
+    max-width: 394px;
     margin: 0 auto;
     border-bottom:0.5px solid #fff;
 
 }
 
 .films-header__input {
-  min-width: 280px;
+    
+    @media screen and (min-width: 320px) {
+        min-width: 280px;
+    }
     padding: 0 0 4px; 
 
 background: rgba(232, 225, 225, 0);
@@ -116,21 +199,40 @@ color: var(--color-text-white);
 }
 
 .films-header__button {
-    padding: 14px;
+    padding-top: 14px;
+    padding-bottom: 12px;
+   @media screen and (min-width: 320px) {
     min-width: 120px;
+   }
+
+   @include mobile {
+    min-width: 130px;
+   } 
+   @include tablet {
+    min-width: 150px;
+   }
     
         font-weight: 500;
     font-size: 12px;
     line-height: calc(16 / 12);
-    color: #fff;
+    color: var(--color-text-white);
     border: 1px solid #fff;
     border-radius: 5px;
         text-transform: uppercase;
-    
-        background: #f6f1f101;
-    }
+        background-color: rgba(255, 255, 255, 0);
+        }
     
         .films-header__button-right {
-            margin-left: 20px;
+            @media screen and (min-width: 320px) {
+                margin-left: 20px;
+
+            }
         }
+
+        .is-on {
+            border: none;
+            background-color: var(--color-hoverfocus);
+            box-shadow: 0px 0px 32px 6px #ff6b01bd;
+            -webkit-box-shadow: 0px 0px 32px 6px #ff6b01bd;
+            -moz-box-shadow: 0px 0px 32px 6px #ff6b01bd;     }
     
