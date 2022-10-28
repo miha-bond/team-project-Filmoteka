@@ -1,0 +1,29 @@
+// .container {
+// }
+
+// .gallery {
+// }
+
+// .gallery__list {
+// }
+
+.gallery__item {
+  font: 15px sans-serif;
+  display: flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid black;
+}
+.card:hover,
+.card:focus {
+  color: gray;
+}
+// .film_info {
+// }
+
+// .film_list {
+// }
