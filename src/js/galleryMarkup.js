@@ -1,8 +1,11 @@
-export function createMarkup(response) {
+import { refs } from './refs';
+
+
+function createMarkup(response) {
   let markup = response.map(
     ({ poster_path, title, genres_ids, release_date }) => {
       return `<div class="card">
-    <img src="https://image.tmdb.org/t/p/w200/${ poster_path }" alt="${''}"  />
+    <img src="https://image.tmdb.org/t/p/w200/${poster_path}" alt="${''}"  />
   <div class="film_info">
   <ul class="film_list">
    <li class="film_list"> ${title} </li>
@@ -15,4 +18,3 @@ export function createMarkup(response) {
   );
   refs.galleryItem.insertAdjacentHTML('beforeend', markup.join(''));
 }
-
