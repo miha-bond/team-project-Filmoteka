@@ -8,6 +8,7 @@ export default class ThemoviedbAPI {
   #query = '';
   #page = 1;
   
+  
   async getTrendingMovies() {
     const urlAXIOS = `trending/movie/day?api_key=${KEY}&`;
     const { data } = await axios.get(urlAXIOS);

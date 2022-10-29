@@ -1,6 +1,7 @@
 import { refs } from './refs';
 
 export default function createMarkup(response) {
+  
   let markup = response.map(
     ({ poster_path, title, genres_ids, release_date }) => {
       return `<div class="card">

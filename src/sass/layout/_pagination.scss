@@ -1,0 +1,17 @@
+.pagination {
+    @include font(500, 12, 16, normal);
+}
+.pagination__list {
+    @include flex;
+    justify-content: center;
+}
+.pagination__item {
+    padding: 13px;
+    
+    cursor: pointer;
+}
+  
+  .pagination__item--active {
+   
+    color: var(--color-hoverfocus);
+  }
