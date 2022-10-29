@@ -1,5 +1,6 @@
 import createMarkup from './galleryMarkup';
 import ThemoviedbAPI from './themoviedbAPI';
+import './modalCard';
 
 const API = new ThemoviedbAPI();
 initPage();
