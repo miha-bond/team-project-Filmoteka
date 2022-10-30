@@ -1,6 +1,5 @@
-// import iconURL from '../images/sprite.svg';
 import iconURL from '../img/symbol-defs.svg';
-export const backdrop = document.querySelector('.backdrop');
+import { refs } from './refs';
 
 export function renderModal({
   poster_path,
@@ -60,5 +59,5 @@ export function renderModal({
                         </div>
                         </div>
                     </div>`;
-  backdrop.innerHTML = markup;
+  refs.backdrop.innerHTML = markup;
 }
