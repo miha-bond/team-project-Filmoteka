@@ -7,7 +7,14 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 export default class ThemoviedbAPI {
   #query = '';
   #page = 1;
-  
+  #params = {
+    params: {
+      api_key: KEY,
+      language: 'en-US',
+      include_adult: false,
+    },
+  };
+
   async getTrendingMovies() {
     const urlAXIOS = `trending/movie/day?api_key=${KEY}&`;
     const { data } = await axios.get(urlAXIOS);
@@ -22,15 +29,8 @@ export default class ThemoviedbAPI {
   }
 
   async getMovieByName() {
-    const params = {
-      api_key: KEY,
-      query: this.#query,
-      language: 'en-US',
-      page: this.#page,
-      include_adult: false,
-    };
-    const urlAXIOS = `search/movie?${params}`;
-    const { data } = await axios.get(urlAXIOS);
+    const urlAXIOS = `search/movie?query=${this.#query}&page=${this.#page}`;
+    const { data } = await axios.get(urlAXIOS, this.#params);
     return data;
   }
 

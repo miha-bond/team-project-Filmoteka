@@ -1,4 +1,4 @@
-import { save, remove } from "./storage";
+import { save, remove } from './storage';
 
  export function localStorageInitPage(arr) {
       const C_R = 'current response';
@@ -24,5 +24,3 @@ save(currentKey, JSON.stringify(arr))
       localStorage.remove(`${key}`);
     }
     }
-
- 
