@@ -14,9 +14,9 @@ export default class ThemoviedbAPI {
       include_adult: false,
     },
   };
+  
   #perPage = 20;
-  
-  
+
   async getTrendingMovies() {
     const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
       this.#page}`;
