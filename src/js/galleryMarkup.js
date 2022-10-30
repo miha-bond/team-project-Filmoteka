@@ -1,4 +1,6 @@
 import { refs } from './refs';
+import { genres } from './ganresId';
+
 
 export default function createMarkup({results}) {
   let markup = results.map(
@@ -16,4 +18,16 @@ export default function createMarkup({results}) {
     }
   );
   refs.galleryItem.insertAdjacentHTML('beforeend', markup.join(''));
+}
+
+function getGenresByIds(ids) {
+  const genresArr = ids.map(id =>
+    genres.filter(genre => genre.id === id).map(genre => genre.name)
+  );
+
+  if (genresArr.length > 2) {
+    return genresArr.slice(0, 2).join(', ') + ', Other';
+  } else {
+    return genresArr.join(', ');
+  }
 }

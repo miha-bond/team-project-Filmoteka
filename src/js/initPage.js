@@ -1,8 +1,6 @@
 import createMarkup from './galleryMarkup';
 import ThemoviedbAPI from './themoviedbAPI';
-import './modalCard';
-import localStorageRecharge from './storage-proceccing';
-
+import {localStorageInitPage} from './storage-proceccing'
 
 const API = new ThemoviedbAPI();
 initPage();
