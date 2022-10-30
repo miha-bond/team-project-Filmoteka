@@ -3,47 +3,80 @@ import { refs } from './refs';
 import createMarkup from './galleryMarkup';
 const API = new ThemoviedbAPI();
 
-  let currentPage = 1;
-  let perPage;
- 
- 
 
- export function createPagination({total_pages}){
-    for (let i = 0; i < 20; i+=1) {
-        const liEl = createPaginationBtn(i + 1);
-        refs.paginationList.appendChild(liEl)
-      }
-}
-function createPaginationBtn(page) {
-    
-    const liEl = document.createElement("li");
-    liEl.classList.add('pagination__item')
-    liEl.innerText = page
+let currentPage = API.page;
+let perPage;
 
-    if (currentPage == page) liEl.classList.add('pagination__item--active');
+const LS_CURRENT_PAGE_KEY = currentPage;
 
-    liEl.addEventListener('click', () => {
-      currentPage = page;
-      perPage = 20;
-      main();
-      async function main() {
-      const popularMovies = await API.getPopularMovies();
-      console.log(popularMovies);
-      // createMarkup(popularMovies);
-      displayRandomPage(popularMovies, perPage, currentPage)
-      console.log(popularMovies);
-      }
-
-
-      let currentItemLi = document.querySelector('li.pagination__item--active');
-      currentItemLi.classList.remove('pagination__item--active');
-
-      liEl.classList.add('pagination__item--active');
-    })
-
-    return liEl;
+export function createPagination({ results }) {
+  //тут приходит массив фильмов, в зависимости от длины массива - рендарится кол-во кнопок
+  for (let i = 0; i < results.length; i += 1) {
+    const liEl = createPaginationBtn(i + 1);
+    refs.nextBtnItem.before(liEl);
   }
+}
 
+function createPaginationBtn(page) {
+  const liEl = document.createElement('li');
+  liEl.classList.add('pagination__item');
+  liEl.innerText = page;
+
+  if (currentPage === page) liEl.classList.add('pagination__item--active');
+
+  liEl.addEventListener('click', () => {
+    API.page = page;
+    currentPage = API.page;
+    perPage = API.perPage;
+    main();
+
+    async function main() {
+      const popularMovies = await API.getPopularMovies();
+      refs.galleryItem.innerHTML = '';
+      createMarkup(popularMovies);
+    }
+
+    let currentItemLi = document.querySelector('li.pagination__item--active');
+    currentItemLi.classList.remove('pagination__item--active');
+
+    liEl.classList.add('pagination__item--active');
+    // Не понимаю, как добавить активный класс на кнопку с цифрой
+  });
+
+  return liEl;
+}
+
+refs.prevBtn.addEventListener('click', prevPage);
+
+refs.nextBtn.addEventListener('click', nextPage);
+async function prevPage() {
+  refs.galleryItem.innerHTML ="";
+  
+    API.decrementPage();
+    const data = await API.getPopularMovies();
+    createMarkup(data);
+  
+  
+  // if(currentPage === 1) {
+  //   refs.prevBtn.classList.add('is-hidden')
+  // }
+}
+async function nextPage() {
+  refs.galleryItem.innerHTML ="";
+  API.incrementPage();
+  const data = await API.getPopularMovies();
+  createMarkup(data);
+  let currentItemLi = document.querySelector('li.pagination__item--active');
+    currentItemLi.classList.remove('pagination__item--active');
+
+    // if (currentPage) liEl.classList.add('pagination__item--active');
+  
+  // if (!data.page < data.total_pages){
+  //   console.log(data.page);
+  //   console.log(data.total_pages);
+  //   refs.nextBtn.classList.add('is-hidden')
+  // }
+}
 
 // export function createPagination({page, total_pages}) {
 //     let liTag = '';
@@ -120,17 +153,67 @@ function createPaginationBtn(page) {
 // }
 
 
-function displayRandomPage(response, perPage, page) {
-  console.log(response);
-  refs.paginationList.innerHTML = "";
-  page -= 1;
-
-  const start = perPage * page;
-  console.log(start);
-  const end = start + perPage;
-  console.log(end);
-  const paginatedData = response.slice(start, end);
-  console.log(paginatedData); // Почему массив пустой??
-  createMarkup(paginatedData);
+// let perPage = 20;
+// let currentPage = 1;
   
-}
+
+// refs.prevBtn.addEventListener('click', prevPage);
+
+// refs.nextBtn.addEventListener('click', nextPage);
+
+// export function createPagination(data){
+//     for (let i = 0; i < data.results.length; i += 1) {
+//         const liEl = createPaginationBtn(i + 1);
+//         refs.nextBtnItem.before(liEl)
+//       }
+// }
+// function createPaginationBtn(page) {
+    
+//     const liEl = document.createElement("li");
+//     liEl.classList.add('pagination__item')
+//     liEl.innerText = page
+
+//     if (API.page == page) liEl.classList.add('pagination__item--active');
+
+//     liEl.addEventListener('click', () => {
+//       currentPage = page;
+//       // perPage = 20;
+//       main();
+//       async function main() {
+//       const popularMovies = await API.getPopularMovies();
+//       console.log(popularMovies);
+//       // createMarkup(popularMovies);
+
+
+//       displayRandomPage(popularMovies, perPage, currentPage)
+//       console.log(popularMovies);
+//       }
+
+
+//       let currentItemLi = document.querySelector('li.pagination__item--active');
+//       currentItemLi.classList.remove('pagination__item--active');
+
+//       liEl.classList.add('pagination__item--active');
+//     })
+
+//     return liEl;
+//   }
+
+
+
+
+// function displayRandomPage(response, perPage, page) {
+//   console.log(response);
+//   refs.paginationList.innerHTML = "";
+//   page -= 1;
+
+//   const start = perPage * page;
+//   console.log(start);
+//   const end = start + perPage;
+//   console.log(end);
+//   console.log(response);
+//   const paginatedData = response.slice(start, end);
+//   console.log(paginatedData); // Почему массив пустой??
+//   createMarkup(paginatedData);
+  
+// }
