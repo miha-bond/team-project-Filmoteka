@@ -12,7 +12,6 @@ export default function createMarkup({ results }) {
             <div class="film_info">
                 <h2 class="film_title"> ${title} </h2>
                 <p class="film_text"> ${genres} <span> | </span> ${release_date}</p>
-                <p class="film_text"></p>
             </div>
     </div>
     </li>`;
