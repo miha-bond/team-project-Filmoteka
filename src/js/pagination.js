@@ -9,18 +9,66 @@ let perPage;
 
 const LS_CURRENT_PAGE_KEY = currentPage;
 
+// export function createPaginationLayout({ page, total_pages }) {
+//   const dataSet = createArr(page, total_pages);
+//   console.log(dataSet);
+//   renderPagination(dataSet, page, total_pages);
+// }
+// function renderPagination(arr, currentPage, lastPage) {
+//   const markup = arr
+//     .map(index => {
+//       console.log(index);
+//       if (index === 0)
+//         return `<li class = "pagination__item"><div class = "???">...</div></li>`;
+//       if (index === 1)
+//         return `
+//         <li class = "pagination__item">
+//           <button class = "${
+//             index === currentPage ? 'pagination__item--active' : ''
+//           }" type = "button">1</button>
+//         </li>
+//       `;
+//       if (index === lastPage)
+//         return `
+//         <li class="pagination__item">
+//           <button class="${
+//             index === currentPage ? 'pagination__item--active' : ''
+//           }" type = "button">
+//             ${lastPage}
+//           </button>
+//         </li>
+//       `;
+
+//       return `
+//         <li class="pagination__item">
+//           <button class="${
+//             index === currentPage ? 'pagination__item--active' : ''
+//           }" type = "button">
+//             ${index}
+//           </button>
+//         </li>
+//       `;
+//     })
+//     .join(' ');
+//     console.log(markup);
+//   refs.paginationList.innerHTML = '';
+//   refs.paginationList.insertAdjacentHTML('beforeend', markup);
+//   console.log(markup);
+//   createPaginationBtn(currentPage);
+// }
+
 export function createPagination({ results }) {
   //тут приходит массив фильмов, в зависимости от длины массива - рендарится кол-во кнопок
   for (let i = 0; i < results.length; i += 1) {
     const liEl = createPaginationBtn(i + 1);
-    refs.nextBtnItem.before(liEl);
+    refs.paginationList.appendChild(liEl);
   }
 }
 
 function createPaginationBtn(page) {
   const liEl = document.createElement('li');
   liEl.classList.add('pagination__item');
-  liEl.innerText = page;
+  liEl.textContent = page;
 
   if (currentPage === page) liEl.classList.add('pagination__item--active');
 
@@ -40,7 +88,7 @@ function createPaginationBtn(page) {
     currentItemLi.classList.remove('pagination__item--active');
 
     liEl.classList.add('pagination__item--active');
-    // Не понимаю, как добавить активный класс на кнопку с цифрой
+    
   });
 
   return liEl;
@@ -66,10 +114,50 @@ async function nextPage() {
   API.incrementPage();
   const data = await API.getPopularMovies();
   createMarkup(data);
-  let currentItemLi = document.querySelector('li.pagination__item--active');
-    currentItemLi.classList.remove('pagination__item--active');
 
-    // if (currentPage) liEl.classList.add('pagination__item--active');
+
+  
+  
+  // function createArr(start, end) {
+  //   const arr = [];
+  
+  //   for (let i = start - 2; i <= start + 2; i += 1) {
+  //     if (i >= 1 && i <= end) {
+  //       arr.push(i);
+  //     }
+  //   }
+  
+  //   if (arr[0] === 2) arr.unshift(1);
+  //   if (arr[0] > 3) arr.unshift(1, 0);
+  
+  //   if (arr[arr.length - 1] < end) arr.push(0, end);
+  //   if (arr[arr.length - 1] === end - 2) arr.push(end - 1);
+  //   if (arr[arr.length - 1] === end - 3) arr.push(end - 2);
+  
+  //   return arr;
+  // }
+
+
+
+
+
+
+
+// function renderPagination(arr, currentPage, totalPages) {
+//   const markup = arr.map(index => {
+//     console.log(index);
+//     if (index === 0) <li>...</li>;
+//     if (index === 1) <li class= ${(1 === currentPage ? 'active' : '')} > 1</li >;
+//     if (index === totalPages) <li class= ${(totalPages === currentPage ? 'active' : '')} > ${ totalPages }</li >;
+
+//     return <li class= ${(${index} === currentPage ? 'active' : '')} > ${ index }</li >
+//   });
+// }
+  
+  // let currentItemLi = document.querySelector('li.pagination__item--active');
+  //   currentItemLi.classList.remove('pagination__item--active');
+
+  //   if (currentPage) liEl.classList.add('pagination__item--active');
   
   // if (!data.page < data.total_pages){
   //   console.log(data.page);
@@ -217,3 +305,28 @@ async function nextPage() {
 //   createMarkup(paginatedData);
   
 // }
+
+// function createPaginationLayout({ page, total_pages }) {
+//   const dataSet = createArr(page, total_pages);
+//   console.log(dataSet);
+//   // renderPagination(dataSet, page, total_pages);
+// }
+
+function createArr(start, end) {
+  const arr = [];
+
+  for (let i = start - 2; i <= start + 2; i += 1) {
+    if (i >= 1 && i <= end) {
+      arr.push(i);
+    }
+  }
+
+  if (arr[0] === 2) arr.unshift(1);
+  if (arr[0] > 3) arr.unshift(1, 0);
+
+  if (arr[arr.length - 1] < end) arr.push(0, end);
+  if (arr[arr.length - 1] === end - 2) arr.push(end - 1);
+  if (arr[arr.length - 1] === end - 3) arr.push(end - 2);
+
+  return arr;
+}

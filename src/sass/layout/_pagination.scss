@@ -1,17 +1,24 @@
 .pagination {
     @include font(500, 12, 16, normal);
+   font-family:Roboto;
+}
+.pagination__box{
+ @include flex;
+ justify-content: center;
 }
 .pagination__list {
     @include flex;
     justify-content: center;
+    // height: 40px;
 }
 .pagination__item {
     padding: 13px;
-    
+    // height: 40px;
     cursor: pointer;
+    // display:inline;
 }
   
   .pagination__item--active {
-   
+    // color: var(--color-text-white);
     color: var(--color-hoverfocus);
   }
