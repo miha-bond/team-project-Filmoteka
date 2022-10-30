@@ -1,7 +1,7 @@
 import { refs } from './refs';
 
-export default function createMarkup(response) {
-  let markup = response.map(
+export default function createMarkup({results}) {
+  let markup = results.map(
     ({ poster_path, title, genres_ids, release_date }) => {
       return `<div class="card">
     <img src="https://image.tmdb.org/t/p/w200/${poster_path}" alt="${''}"  />

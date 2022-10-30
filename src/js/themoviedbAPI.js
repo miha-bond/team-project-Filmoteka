@@ -19,13 +19,13 @@ export default class ThemoviedbAPI {
     const urlAXIOS = `trending/movie/day?api_key=${KEY}&`;
     const { data } = await axios.get(urlAXIOS);
     console.log(data.results);
-    return data.results;
+    return data;
   }
 
   async getPopularMovies() {
     const urlAXIOS = `trending/movie/day?api_key=${KEY}`;
     const { data } = await axios.get(urlAXIOS);
-    return data.results;
+    return data;
   }
 
   async getMovieByName() {
