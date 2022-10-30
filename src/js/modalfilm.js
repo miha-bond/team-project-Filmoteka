@@ -1,4 +1,4 @@
-import iconURL from '../src/img/symbol-defs.svg#';
+// import iconURL from '../src/img/symbol-defs.svg';
 export const backdrop = document.querySelector('.backdrop');
 
 export function renderModal({
@@ -50,7 +50,7 @@ export function renderModal({
                         <td class="modal__info-value">${genre_ids}</td>
                         </tr>
                         </table>
-                
+
                         <h3 class="modal__about">About</h3>
                         <p class="modal__about-text">${overview}</p>
                         <div class="modal__btn-container">
