@@ -62,8 +62,13 @@ max-width: 1280px;
     text-decoration: underline;
     color: currentColor;
   }
-
-  .ua {
-    background: rgb(249,207,68);
-    background: linear-gradient(0deg, rgba(249,207,68,0.31404280462184875) 50%, rgba(85,217,221,0.3112416841736695) 50%);
+  .heart-icon {
+    display: inline-flex;
+    justify-content: center;
+    align-items: flex-end;
+    width: 1.25em;
+    height: 1.2em;
+    background-color: #0077ff;
+    border-radius: 50%;
   }
+
