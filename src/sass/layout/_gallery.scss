@@ -1,29 +1,62 @@
-// .container {
-// }
-
-// .gallery {
-// }
-
-// .gallery__list {
-// }
-
-.gallery__item {
-  font: 15px sans-serif;
+.gallery__list {
+  padding-top: 20px;
+  padding-bottom: 20px;
   display: flex;
-  gap: 30px;
   flex-wrap: wrap;
+  gap: 30px;
   justify-content: center;
 }
 
-.card {
-  border: 1px solid black;
+.gallery__item {
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    width: calc((100% - 30px) / 2);
+  }
+  @media screen and (min-width: 1280px) {
+    width: calc((100% - 60px) / 3);
+  }
 }
-.card:hover,
-.card:focus {
-  color: gray;
+.film_title {
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 12px;
+  line-height: calc(16 / 12);
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: calc(24 / 20);
+  }
 }
-// .film_info {
-// }
+.film_text {
+  color: #ff6b08;
+  font-family: Roboto;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: calc(16 / 12);
 
-// .film_list {
-// }
+  text-align: left;
+  @media screen and (min-width: 768px) {
+  }
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: calc(24 / 20);
+  }
+}
+.img {
+  height: 400px;
+  width: 280px;
+  display: block;
+  border-radius: 5px;
+  margin-bottom: 10px;
+
+  width: 100%;
+  @media screen and (min-width: 768px) {
+    width: 340px;
+    height: 455px;
+  }
+  @media screen and (min-width: 1280px) {
+    width: 400px;
+    height: 570px;
+  }
+}
