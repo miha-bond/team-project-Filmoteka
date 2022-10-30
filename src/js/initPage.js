@@ -7,6 +7,6 @@ initPage();
 
 export default async function initPage() {
   const popularMovies = await API.getPopularMovies();
-  localStorageInitPage(popularMovies);
+  // localStorageRecharge(popularMovies);
   createMarkup(popularMovies);
 }
