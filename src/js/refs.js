@@ -1,7 +1,5 @@
 export const refs = {
-    galleryItem: document.querySelector('.gallery__item'),
-  };
-
-export const backdrop = {
+  galleryItem: document.querySelector('.gallery__item'),
+  renderModal: document.querySelector('.gallery__list'),
   backdrop: document.querySelector('.backdrop'),
 };
