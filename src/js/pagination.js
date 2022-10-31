@@ -6,7 +6,24 @@ const API = new ThemoviedbAPI();
 export function createPaginationLayout({ page, total_pages }) {
   const dataSet = createArr(page, total_pages);
   renderPagination(dataSet, page, total_pages);
-
+  
+  if(page - 1 === 0) {
+    refs.prevBtn.disabled = true;
+    } else {
+      refs.prevBtn.disabled = false;
+    } 
+  if(page + 1 > total_pages) {
+    refs.nextBtn.disabled = true;
+  } else {
+    refs.nextBtn.disabled = false;
+  }
+  if(total_pages === 1) {
+    refs.prevBtn.style.visibility = "hidden";
+    refs.nextBtn.style.visibility = "hidden";
+  } else {
+    refs.prevBtn.style.visibility = "visible";
+    refs.nextBtn.style.visibility = "visible";
+  }
 }
 
 function createArr(start, end) {
