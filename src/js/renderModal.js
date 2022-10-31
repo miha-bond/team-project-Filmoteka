@@ -1,6 +1,6 @@
-// import iconURL from '../images/sprite.svg';
 import iconURL from '../img/symbol-defs.svg';
 export const backdrop = document.querySelector('.backdrop');
+import { getGenresByIds } from './galleryMarkup';
 
 export function renderModal({
   poster_path,
@@ -14,14 +14,21 @@ export function renderModal({
   name,
   original_name,
 }) {
-  const markup = `<div class="modal">
+  let genres = getGenresByIds(genre_ids);
+  let poster = getPoster(poster_path);
+
+  if (!genres) {
+    genres = 'not available';
+  }
+
+  const markup = /*html*/ `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="14" height="14">
                             <use href="${iconURL}#icon-close-modal-btn"></use>
                             </svg>
                         </button>
                         <div class="modal__image-thumb">
-                        <img class="modal__image" src="https://image.tmdb.org/t/p/original/${poster_path}" alt="${title} poster">
+                        <img class="modal__image" src="${poster}" alt="${title} poster">
                         </div>
                         <div class="modal__info-thumb">
                         <h2 class="modal__title">${
@@ -48,7 +55,7 @@ export function renderModal({
                         </tr>
                         <tr class="modal__info-entry">
                         <td class="modal__info-key">Genre</td>
-                        <td class="modal__info-value">${genre_ids}</td>
+                        <td class="modal__info-value">${genres}</td>
                         </tr>
                         </table>
                 
@@ -61,4 +68,11 @@ export function renderModal({
                         </div>
                     </div>`;
   backdrop.innerHTML = markup;
+}
+function getPoster(poster) {
+  if (poster === null) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg';
+  } else {
+    return `https://image.tmdb.org/t/p/w300/${poster}`;
+  }
 }
