@@ -46,7 +46,7 @@ function createArr(start, end) {
   
 
   if (arr[0] === 2) arr.unshift(1);
-  if (arr[0] > 3) arr.unshift(1, 0);
+  if (arr[0] > 3) arr.unshift(1, -1);
 
   if (arr[arr.length - 1] < end) arr.push(0, end);
   if (arr[arr.length - 1] === end - 2) arr.push(end - 1);
@@ -59,9 +59,13 @@ function createArr(start, end) {
 function renderPagination(arr, currentPage, lastPage) {
   console.log(arr);
   const markup = arr.map(index => {
+    if (index === -1)
+    return `<li class="pagination__item">
+    <button class="pagination__button dots" type = "button" id = "dots_prev">...</button>
+  </li>`;
     if (index === 0)
       return `<li class="pagination__item">
-            <div class="pagination__dots">...</div>
+            <button class="pagination__button dots" type = "button" id = "dots_next">...</button>
           </li>`;
     if (index === 1)
       return `
@@ -108,7 +112,22 @@ function createPaginationBtn() {
     item.addEventListener('click', e => {
       if (e.currentTarget.id === 'prevBtn') return prevPage();
       if (e.currentTarget.id === 'nextBtn') return nextPage();
-      API.page = e.target.id;
+      if(e.target.id === 'dots_next') {
+        const numberApiPage = Number(API.page);
+        console.log(numberApiPage);
+        API.page = numberApiPage + 3
+        
+        
+        }
+        else if (e.target.id === 'dots_prev') {
+          const numberApiPage = Number(API.page);
+          console.log(numberApiPage);
+          API.page = numberApiPage - 3;
+          
+          } else {
+          API.page = e.target.id;
+        }
+      
       main();
     });
   });
@@ -134,3 +153,5 @@ async function nextPage() {
 refs.prevBtn.addEventListener('click', prevPage);
 
 refs.nextBtn.addEventListener('click', nextPage);
+
+// 
