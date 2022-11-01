@@ -1,27 +1,63 @@
 <header class="films-header films-header--home">
   <div class="films-header__wrap">
     <div class="films-header__nav-wrap">
-      <a href="./index.html" class="films-header__link"><svg class="films-header__icon"
-        width="24" height="24"><use href="./img/symbol-defs.svg#icon-film"></use>
+      <a href="./index.html" class="films-header__link"
+        ><svg class="films-header__icon" width="24" height="24">
+          <use href="./img/symbol-defs.svg#icon-film"></use>
         </svg>
-        <span class="films-header__logo">Filmoteka</span></a>
-       <nav class="films-header__nav">
+        <span class="films-header__logo">Filmoteka</span></a
+      >
+      <nav class="films-header__nav">
         <ul class="films-header__nav-list">
-          <li class="films-header__nav-item"><a href="" class="films-header__nav-link films-header__nav-link--current">home</a></li>
-          <li class="films-header__nav-item"><a href="./queue.html" class="films-header__nav-link">my library</a></li>
+          <li class="films-header__nav-item">
+            <a
+              href=""
+              class="films-header__nav-link films-header__nav-link--current"
+              >home</a
+            >
+          </li>
+          <li class="films-header__nav-item">
+            <a href="./queue.html" class="films-header__nav-link">my library</a>
+          </li>
         </ul>
-       </nav>
+      </nav>
     </div>
     <form class="films-header__search-form">
       <input
-      class="films-header__input"
+        class="films-header__input"
         type="text"
         name="searchQuery"
         placeholder="Movie search"
         autocomplete="off"
       />
-      <button type="submit" class="films-header__search-button" data-search><svg class="films-header__search-button-icon" width="12" height="12"><use href="./img/symbol-defs.svg#icon-search-2">
-</use></svg></button>
+      <button type="submit" class="films-header__search-button" data-search>
+        <svg class="films-header__search-button-icon" width="12" height="12">
+          <use href="./img/symbol-defs.svg#icon-search-2"></use>
+        </svg>
+      </button>
     </form>
+    <div class="custom-select" style="width: 200px">
+      <select name="genres" id="genres">
+        <option value=" " selected>Select movie genre:</option>
+        <option value="28">Action</option>
+        <option value="12">Adventure</option>
+        <option value="16">Animation</option>
+        <option value="35">Comedy</option>
+        <option value="80">Crime</option>
+        <option value="99">Documentary</option>
+        <option value="18">Drama</option>
+        <option value="10751">Family</option>
+        <option value="14">Fantasy</option>
+        <option value="36">History</option>
+        <option value="27">Horror</option>
+        <option value="10402">Music</option>
+        <option value="9648">Mystery</option>
+        <option value="10749">Romance</option>
+        <option value="878">Science Fiction</option>
+        <option value="53">Thriller</option>
+        <option value="10752">War</option>
+        <option value="37">Western</option>
+      </select>
+    </div>
   </div>
 </header>
