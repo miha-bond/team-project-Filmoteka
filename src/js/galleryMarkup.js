@@ -1,9 +1,14 @@
 import { refs } from './refs';
 import { genres } from './ganresId';
 
+
+
 export default function createMarkup({ results }) {
+   
+  
   let markup = results.map(
     ({ poster_path, title, genre_ids, release_date }) => {
+      
       const genres = getGenresByIds(genre_ids);
       return `
     <li class="gallery__item">
