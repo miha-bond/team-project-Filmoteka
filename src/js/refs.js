@@ -7,4 +7,5 @@ export const refs = {
   searchFormRef: document.querySelector('.films-header__search-form'),
   backdrop: document.querySelector('.backdrop'),
   renderModal: document.querySelector('.gallery'),
+  body: document.querySelector('body'),
 };
