@@ -4,7 +4,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  justify-content: center;
+  
 }
 
 .gallery__item {
@@ -58,5 +58,13 @@
   @media screen and (min-width: 1280px) {
     width: 400px;
     height: 570px;
+  }
+}
+.film_text_border{
+  border-right: 1px solid ;
+  padding-right: 5px;
+  @media screen and (min-width: 1280px) {
+    font-size: 20px;
+    line-height: calc(24 / 20);
   }
 }

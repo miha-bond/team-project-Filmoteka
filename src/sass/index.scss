@@ -8,12 +8,14 @@
 
 // compinents
 @import './components/container';
+@import './components/team-modal';
 
 // common
 @import './common';
 
 // layout
 @import './layout/header';
+@import './layout/filter';
 @import './layout/gallery';
 @import './layout/footer';
 @import './layout/pagination';
