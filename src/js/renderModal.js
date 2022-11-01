@@ -1,6 +1,6 @@
 import iconURL from '../img/symbol-defs.svg';
-export const backdrop = document.querySelector('.backdrop');
 import { getGenresByIds } from './galleryMarkup';
+import { refs } from './refs';
 
 export function renderModal({
   poster_path,
@@ -23,8 +23,8 @@ export function renderModal({
 
   const markup = /*html*/ `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
-                            <svg class="modal__icon-close" width="14" height="14">
-                            <use href="${iconURL}#icon-close-modal-btn"></use>
+                            <svg class="modal__icon-close" width="25px" height="25px">
+                            <use href="${iconURL}#icon-close_menu"></use>
                             </svg>
                         </button>
                         <div class="modal__image-thumb">
@@ -67,7 +67,7 @@ export function renderModal({
                         </div>
                         </div>
                     </div>`;
-  backdrop.innerHTML = markup;
+  refs.backdrop.innerHTML = markup;
 }
 function getPoster(poster) {
   if (poster === null) {
