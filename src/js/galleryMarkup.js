@@ -2,10 +2,9 @@ import { refs } from './refs';
 import { genres } from './ganresId';
 import { load, save } from './storage';
 
-
-
 export default function createMarkup({ results }) {
   save('currentPage', results);
+
   let markup = results.map(
     ({ poster_path, title, genre_ids, release_date, id }) => {
       const genres = getGenresByIds(genre_ids);
