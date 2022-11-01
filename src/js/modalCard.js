@@ -1,67 +1,50 @@
-import ThemoviedbAPI from './themoviedbAPI';
-import { renderModal, backdrop } from './renderModal';
+// import ThemoviedbAPI from './themoviedbAPI';
+import { renderModal } from './renderModal';
 
-import createMarkup from './galleryMarkup';
 import { load, save } from './storage';
+import { refs } from './refs';
 
-//refs
-const refs = {
-  renderModal: document.querySelector('.gallery__list'),
-};
-
-const apiService = new ThemoviedbAPI();
+// const API = new ThemoviedbAPI();
 
 if (refs.renderModal) {
   refs.renderModal.addEventListener('click', showCard);
 }
 
-window.addEventListener('keydown', closeModalHandler);
+// window.addEventListener('keydown', closeModalHandler);
 
 function closeModalHandler(e) {
+  console.log(e.code);
   if (e.code === 'Escape') {
-    backdrop.classList.add('is-hidden');
+    refs.backdrop.classList.add('is-hidden');
+    refs.body.classList.toggle('no-scroll');
+    window.removeEventListener('keydown', closeModalHandler);
   }
 }
 
 function showCard(e) {
   e.preventDefault();
+  window.addEventListener('keydown', closeModalHandler);
+  console.log(e);
 
-  if (e.target.nodeName === 'LI') {
+  if (e.target.nodeName === 'DIV') {
     return;
   }
+  const selectedCardId = Number(e.target.id);
+  const getCurrentPage = load('currentPage');
 
-  backdrop.classList.remove('is-hidden');
+  getCurrentPage.forEach(element => {
+    if (selectedCardId === element.id) {
+      renderModal(element);
+      let closeModal = document.querySelector('[data-modal-close]');
+      closeModal.addEventListener('click', onCloseBtn);
 
-  fetchGallery(
-    '/' +
-      e.target.src.substring(
-        e.target.src.lastIndexOf('/') + 1,
-        e.target.src.length
-      )
-  );
-}
+      function onCloseBtn() {
+        refs.body.classList.toggle('no-scroll');
+        refs.backdrop.classList.add('is-hidden');
+      }
+    }
+  });
 
-function fetchGallery(params) {
-  apiService
-    // .fetchImage()
-    .getUpcomingMovies()
-    .then(data => {
-      save(data.page, data.results);
-
-      console.log('fetchGallery 1 then', data);
-      return data.results;
-    })
-    .then(result => {
-      console.log('result 123', result);
-
-      result.forEach(element => {
-        renderModal(element);
-        let closeModal = document.querySelector('[data-modal-close]');
-        closeModal.addEventListener('click', onCloseBtn);
-
-        function onCloseBtn() {
-          backdrop.classList.add('is-hidden');
-        }
-      });
-    });
+  refs.backdrop.classList.remove('is-hidden');
+  refs.body.classList.toggle('no-scroll');
 }

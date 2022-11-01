@@ -2,6 +2,10 @@
   cursor: pointer;
 }
 
+.no-scroll {
+  overflow: hidden;
+}
+
 .backdrop {
   position: fixed;
   top: 0;
@@ -70,6 +74,7 @@
   height: 30px;
 
   background-color: transparent;
+  border: none;
 
   transform: scale(1);
 

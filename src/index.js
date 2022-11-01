@@ -1,6 +1,7 @@
+import './js/genres';
+import './js/filter';
 import './js/initPage';
 import './js/modalCard';
-import './js/modalfilm';
 import './js/renderModal';
+import './js/colorButton';
 import './js/searchInput';
-
