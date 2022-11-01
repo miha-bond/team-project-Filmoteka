@@ -5,13 +5,17 @@ export default function createMarkup({ results }) {
   let markup = results.map(
     ({ poster_path, title, genre_ids, release_date }) => {
       const genres = getGenresByIds(genre_ids);
+      const date = new Date(release_date);
+      const releaseDate = date.getFullYear();
+      const poster = getPoster(poster_path);
+
       return `
     <li class="gallery__item">
     <div class="card">
-        <img class='img'src="https://image.tmdb.org/t/p/w300/${poster_path}" alt="${''}"  />
+        <img class='img'src="${poster}" alt="${''}"  />
             <div class="film_info">
                 <h2 class="film_title"> ${title} </h2>
-                <p class="film_text"> ${genres} <span> | </span> ${release_date}</p>
+                <p class="film_text"> <span class='film_text_border'>${genres}</span> ${releaseDate}</p>
             </div>
     </div>
     </li>`;
@@ -29,5 +33,12 @@ function getGenresByIds(ids) {
     return genresArr.slice(0, 2).join(', ') + ', Other';
   } else {
     return genresArr.join(', ');
+  }
+}
+function getPoster(poster) {
+  if (poster === null) {
+    return 'https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg';
+  } else {
+    return `https://image.tmdb.org/t/p/w300/${poster}`;
   }
 }
