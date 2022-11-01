@@ -18,6 +18,12 @@ save(currentKey, JSON.stringify(arr))
     } return
     }
 
+    export function dataElementStorageById (arr) {
+arr.map(obj => {
+  save(`${obj.id}`, obj);
+})
+    }
+
     export function localStorageClear () {
     let keys = Object.keys(localStorage);
     for(let key of keys) {

@@ -13,6 +13,7 @@ export function renderModal({
   overview,
   name,
   original_name,
+  id,
 }) {
   let genres = getGenresByIds(genre_ids);
   let poster = getPoster(poster_path);
@@ -61,7 +62,7 @@ export function renderModal({
                 
                         <h3 class="modal__about">About</h3>
                         <p class="modal__about-text">${overview}</p>
-                        <div class="modal__btn-container">
+                        <div class="modal__btn-container" id="${id}">
                         <button id="watched" type="button" class="modal__btn modal__btn-watched">add to Watched</button>
                         <button id="queue" type="button" class="modal__btn modal__btn-queue">add to queue</button>
                         </div>
