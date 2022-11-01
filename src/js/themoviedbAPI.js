@@ -7,29 +7,33 @@ axios.defaults.baseURL = 'https://api.themoviedb.org/3/';
 export default class ThemoviedbAPI {
   #query = '';
   #page = 1;
+  #params = {
+    params: {
+      api_key: KEY,
+      language: 'en-US',
+      include_adult: false,
+    },
+  };
   
+  #perPage = 20;
+
   async getTrendingMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}&`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
+      this.#page}`;
     const { data } = await axios.get(urlAXIOS);
-    return data.results;
+    return data;
   }
 
   async getPopularMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
+      this.#page}`;
     const { data } = await axios.get(urlAXIOS);
-    return data.results;
+    return data;
   }
 
   async getMovieByName() {
-    const params = {
-      api_key: KEY,
-      query: this.#query,
-      language: 'en-US',
-      page: this.#page,
-      include_adult: false,
-    };
-    const urlAXIOS = `search/movie?${params}`;
-    const { data } = await axios.get(urlAXIOS);
+    const urlAXIOS = `search/movie?query=${this.#query}&page=${this.#page}`;
+    const { data } = await axios.get(urlAXIOS, this.#params);
     return data;
   }
 
@@ -60,6 +64,16 @@ export default class ThemoviedbAPI {
   set query(newQuery) {
     this.#query = newQuery;
   }
+  get page() {
+    return this.#page;
+  }
+
+  set page(newPage) {
+    this.#page = newPage;
+  }
+  get perPage() {
+    return this.#perPage;
+  }
 
   incrementPage() {
     this.#page += 1;
@@ -72,4 +86,4 @@ export default class ThemoviedbAPI {
   resetPage() {
     this.#page = 1;
   }
-}
+ }
