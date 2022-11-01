@@ -226,7 +226,8 @@ color: var(--color-text-white);
             }
         }
 
-        .is-on {
+        .is-on,
+        .tags__btn--active {
             border: none;
             background-color: var(--color-hoverfocus);
             box-shadow: 0px 0px 32px 6px #ff6b01bd;
