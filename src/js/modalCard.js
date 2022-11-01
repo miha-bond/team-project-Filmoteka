@@ -13,7 +13,6 @@ if (refs.renderModal) {
 // window.addEventListener('keydown', closeModalHandler);
 
 function closeModalHandler(e) {
-  console.log(e.code);
   if (e.code === 'Escape') {
     refs.backdrop.classList.add('is-hidden');
     refs.body.classList.toggle('no-scroll');
@@ -24,7 +23,6 @@ function closeModalHandler(e) {
 function showCard(e) {
   e.preventDefault();
   window.addEventListener('keydown', closeModalHandler);
-  console.log(e);
 
   if (e.target.nodeName === 'DIV') {
     return;
@@ -39,6 +37,7 @@ function showCard(e) {
       closeModal.addEventListener('click', onCloseBtn);
 
       function onCloseBtn() {
+        window.removeEventListener('keydown', closeModalHandler);
         refs.body.classList.toggle('no-scroll');
         refs.backdrop.classList.add('is-hidden');
       }
