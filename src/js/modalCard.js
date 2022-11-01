@@ -10,18 +10,23 @@ if (refs.renderModal) {
   refs.renderModal.addEventListener('click', showCard);
 }
 
-window.addEventListener('keydown', closeModalHandler);
+// window.addEventListener('keydown', closeModalHandler);
 
 function closeModalHandler(e) {
+  console.log(e.code);
   if (e.code === 'Escape') {
     refs.backdrop.classList.add('is-hidden');
+    refs.body.classList.toggle('no-scroll');
+    window.removeEventListener('keydown', closeModalHandler);
   }
 }
 
 function showCard(e) {
   e.preventDefault();
+  window.addEventListener('keydown', closeModalHandler);
+  console.log(e);
 
-  if (e.target.nodeName === 'LI') {
+  if (e.target.nodeName === 'DIV') {
     return;
   }
   const selectedCardId = Number(e.target.id);
@@ -34,10 +39,12 @@ function showCard(e) {
       closeModal.addEventListener('click', onCloseBtn);
 
       function onCloseBtn() {
+        refs.body.classList.toggle('no-scroll');
         refs.backdrop.classList.add('is-hidden');
       }
     }
   });
 
   refs.backdrop.classList.remove('is-hidden');
+  refs.body.classList.toggle('no-scroll');
 }
