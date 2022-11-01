@@ -146,6 +146,7 @@ async function prevPage() {
 }
 
 async function nextPage() {
+  API.page = Number(API.page);
   API.incrementPage();
   main();
 }
