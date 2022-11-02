@@ -1,10 +1,12 @@
+.gallery {
+  flex: 1 1 auto;
+}
 .gallery__list {
   padding-top: 20px;
   padding-bottom: 20px;
   display: flex;
   flex-wrap: wrap;
   gap: 30px;
-  
 }
 
 .gallery__item {
@@ -60,8 +62,8 @@
     height: 570px;
   }
 }
-.film_text_border{
-  border-right: 1px solid ;
+.film_text_border {
+  border-right: 1px solid;
   padding-right: 5px;
   @media screen and (min-width: 1280px) {
     font-size: 20px;
