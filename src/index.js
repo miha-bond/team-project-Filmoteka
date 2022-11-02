@@ -1,4 +1,4 @@
-// import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
+import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/filter';
 import './js/initPage';
 import './js/modalCard';
