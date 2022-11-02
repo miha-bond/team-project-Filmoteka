@@ -232,15 +232,16 @@
   }
 }
 
-// .modal__btn:hover,
-// .modal__btn:focus {
-//   color: #ffffff;
-//   background-color: #ff6b08;
-//   border: 1px solid #ff6b08;
+ .modal__btn:hover,
+ .modal__btn:focus {
+   color: #ffffff;
+   background-color: #ff6b08;
+   border: 1px solid #ff6b08;
 
-//   transform: scale(1.05);
-//   box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
-// }
+   transform: scale(1.05);
+   box-shadow: 7px -7px 21px rgba(119, 64, 24, 0.6);
+   cursor: pointer;
+ }
 
 .modal__btn-watched {
   margin-right: 20px;

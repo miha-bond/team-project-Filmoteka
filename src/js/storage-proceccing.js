@@ -24,6 +24,17 @@ arr.map(obj => {
 })
     }
 
+
+    export function getStorageData (e) {
+      
+     let keys = Object.keys(localStorage);
+      keys = keys.filter(el =>
+        el.includes(e.target.textContent.toLowerCase()));
+        
+        return keys;
+
+    }
+
     export function localStorageClear () {
     let keys = Object.keys(localStorage);
     for(let key of keys) {

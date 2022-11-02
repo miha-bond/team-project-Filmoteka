@@ -18,7 +18,6 @@ async function onFormSubmit(evt) {
     if (filmsApi.query === '') return;
 
     const films = await filmsApi.getMovieByName();
-    console.log(films);
     // if (films.length === 0) {
     //   // addErrorStyles();
     //   // errorMessage.style.display = 'block';

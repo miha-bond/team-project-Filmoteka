@@ -1,5 +1,4 @@
 import iconURL from '../img/symbol-defs.svg';
-export const backdrop = document.querySelector('.backdrop');
 import { getGenresByIds } from './galleryMarkup';
 
 export function renderModal({
@@ -68,7 +67,7 @@ export function renderModal({
                         </div>
                         </div>
                     </div>`;
-  backdrop.innerHTML = markup;
+                    document.querySelector('.backdrop').innerHTML = markup;
 }
 function getPoster(poster) {
   if (poster === null) {

@@ -1,6 +1,6 @@
 import ThemoviedbAPI from './themoviedbAPI';
 import { refs } from './refs';
-import createMarkup from './galleryMarkup';
+import {createMarkup} from './galleryMarkup';
 const API = new ThemoviedbAPI();
 
 export function createPaginationLayout({ page, total_pages }) {
@@ -57,7 +57,6 @@ function createArr(start, end) {
 }
 
 function renderPagination(arr, currentPage, lastPage) {
-  console.log(arr);
   const markup = arr.map(index => {
     if (index === -1)
     return `<li class="pagination__item">
@@ -114,14 +113,12 @@ function createPaginationBtn() {
       if (e.currentTarget.id === 'nextBtn') return nextPage();
       if(e.target.id === 'dots_next') {
         const numberApiPage = Number(API.page);
-        console.log(numberApiPage);
         API.page = numberApiPage + 3
         
         
         }
         else if (e.target.id === 'dots_prev') {
           const numberApiPage = Number(API.page);
-          console.log(numberApiPage);
           API.page = numberApiPage - 3;
           
           } else {
