@@ -14,19 +14,17 @@ export default class ThemoviedbAPI {
       include_adult: false,
     },
   };
-  
+
   #perPage = 20;
 
   async getTrendingMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
-      this.#page}`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${this.#page}`;
     const { data } = await axios.get(urlAXIOS);
     return data;
   }
 
   async getPopularMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
-      this.#page}`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${this.#page}`;
     const { data } = await axios.get(urlAXIOS);
     return data;
   }
@@ -46,7 +44,8 @@ export default class ThemoviedbAPI {
   async getTrailer(id) {
     const urlAXIOS = `movie/${id}/videos?api_key=${KEY}&language=en-US`;
     const { data } = await axios.get(urlAXIOS);
-    return data;
+    console.log('getTrailer', data.results[0].key);
+    return data.results[0].key;
   }
 
   async getUpcomingMovies() {
@@ -86,4 +85,4 @@ export default class ThemoviedbAPI {
   resetPage() {
     this.#page = 1;
   }
- }
+}
