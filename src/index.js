@@ -1,5 +1,5 @@
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
-import './js/filter';
+import './js/moviebyGenre';
 import './js/initPage';
 import './js/modalCard';
 import './js/renderModal';
