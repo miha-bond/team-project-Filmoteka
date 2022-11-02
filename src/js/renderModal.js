@@ -84,7 +84,7 @@ function getPoster(poster) {
 
 //Функція для виведення жанрів у модальне вікно
 function getGenresByIds(ids) {
-  return (ganreArr = ids.map(id =>
+  return ids.map(id =>
     genres.filter(genre => genre.id === id).map(genre => genre.name)
-  ));
+  );
 }
