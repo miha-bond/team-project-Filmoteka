@@ -1,6 +1,6 @@
 const bodyRef = document.querySelector('body');
 const toggleRef = document.querySelector('#theme-switch-toggle');
-const footerDarktheme = document.querySelector('.footer');
+const footerDarktheme = document.querySelector('footer');
 
 toggleRef.addEventListener('change', event => {
   if (bodyRef.classList.contains('dark-theme')) {
