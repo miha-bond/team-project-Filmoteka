@@ -6,3 +6,4 @@ import './js/renderModal';
 // import './js/colorButton';
 import './js/searchInput';
 import './js/team-modal';
+import './js/scroll-up-btn';
