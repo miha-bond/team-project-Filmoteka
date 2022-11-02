@@ -3,6 +3,7 @@ import createMarkup from './galleryMarkup';
 import { refs } from './refs';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { renderPaginationOnSearch } from './paginationRequests';
 
 const filmsApi = new ThemoviedbAPI();
 
@@ -15,6 +16,7 @@ async function onFormSubmit(evt) {
     if (filmsApi.query === '') return;
 
     const films = await filmsApi.getMovieByName();
+    renderPaginationOnSearch(filmsApi.page, filmsApi.query);
 
     Loading.standard({
       svgSize: '150px',
