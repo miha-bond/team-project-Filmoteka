@@ -1,4 +1,3 @@
-import './js/filter';
 import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './js/moviebyGenre';
 import './js/initPage';
