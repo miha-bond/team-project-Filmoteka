@@ -1,8 +1,8 @@
 import ThemoviedbAPI from './themoviedbAPI';
 import createMarkup from './galleryMarkup';
 import { refs } from './refs';
-// import { Loading } from 'notiflix/build/notiflix-loading-aio';
-// import { Notify } from 'notiflix/build/notiflix-notify-aio';
+import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const filmsApi = new ThemoviedbAPI();
 
