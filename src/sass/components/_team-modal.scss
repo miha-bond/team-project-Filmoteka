@@ -17,7 +17,7 @@
 
     width: 240px;
 
-    background-color: #534f4f;
+    // background-color: #534f4f;
     border-radius: 15px;
 
     @media screen and (min-width: 768px) {
@@ -73,7 +73,7 @@
     width: 100%;
 
     border-radius: 50%;
-    box-shadow: 5px 5px 11px -2px #000000;
+    box-shadow: 5px 5px 11px -2px #ff6b08;
 }
 
 .team-name {
@@ -124,6 +124,7 @@
     position: absolute;
     top: 93px;
     left: 90px;
+    fill: #ff6b08;
 
     transform: translate(0px, 0px);
     transition: transform,
@@ -135,6 +136,6 @@
     .github__icon {
 
         transform: translate(15px, 55px);
-
+    
     }
 }

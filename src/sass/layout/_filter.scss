@@ -1,9 +1,20 @@
 .custom-select {
   font-family: Roboto;
+  margin: 0 auto;
 }
-select {
+.select {
   font-size: 16px;
-  background-color: #fe7031;
+  color: #000;
+
+  background-color: #e5e5e5;
   border: 6px solid transparent;
-  border-color: #ff6b08 transparent;
+  border-color: #e5e5e5 transparent;
+  border-radius: 5px;
+}
+.select:focus,
+.select:hover {
+  outline: none;
+  color: #fff;
+  background-color: #ff6b01;
+  border-color: #ff6b01 transparent;
 }

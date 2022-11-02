@@ -59,7 +59,7 @@ const markup = `<div class="team-wrapper">
     <div class="team-card">
         <a href="https://github.com/MaryKotliar" target="_blank" class="team-link">
             <img src="${MaryKotliarUrl}" loading="lazy" alt="MaryKotliar" class="team-image">
-            <p class="team-name">MaryKotliar</p>
+            <p class="team-name">Mary</p>
             <p class="team-role">Developer</p>
             <svg class="github__icon" width="30" height="30">
                     <use href="${githubUrl}#github-icon"></use>
@@ -69,7 +69,7 @@ const markup = `<div class="team-wrapper">
     <div class="team-card">
         <a href="https://github.com/SergeyPochapskiy" target="_blank" class="team-link">
             <img src="${SergeyPochapskiyUrl}" loading="lazy" alt="SergeyPochapskiy" class="team-image">
-            <p class="team-name">SergeyPochapskiy</p>
+            <p class="team-name">Sergey</p>
             <p class="team-role">Developer</p>
             <svg class="github__icon" width="30" height="30">
                     <use href="${githubUrl}#github-icon"></use>
@@ -90,7 +90,7 @@ const markup = `<div class="team-wrapper">
     <div class="team-card">
         <a href="https://github.com/Evgenija26" target="_blank" class="team-link">
             <img src="${Evgenija26Url}" loading="lazy" alt="Evgenija26" class="team-image">
-            <p class="team-name">Evgenija26</p>
+            <p class="team-name">Evgenija</p>
             <p class="team-role">Developer</p>
             <svg class="github__icon" width="30" height="30">
                     <use href="${githubUrl}#github-icon"></use>
@@ -132,16 +132,17 @@ const markup = `<div class="team-wrapper">
     </div>`;
 
 const container = document.querySelector('.js-team-modal');
-
+//  console.log(document.querySelector('.js-team-modal'));
 container.addEventListener('click', openModal);
 
 const modal = basicLightbox.create(markup);
 
 function openModal(e) {
-  modal.show();
+  modal.show(modal);
+  
 
   window.addEventListener('keydown', closeModalHandler);
-
+   
   function closeModalHandler(e) {
     if (e.code === 'Escape') {
       modal.close();
