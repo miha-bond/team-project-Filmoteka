@@ -6,6 +6,6 @@ export const refs = {
   galleryItem: document.querySelector('.gallery__list'),
   searchFormRef: document.querySelector('.films-header__search-form'),
   backdrop: document.querySelector('.backdrop'),
-  renderModal: document.querySelector('.gallery'),
+  renderModal: document.querySelector('.gallery__list'),
   body: document.querySelector('body'),
 };

@@ -1,5 +1,6 @@
 // utils
 @import './utils/reset';
+@import './base/font-family';
 @import './utils/variables';
 @import './utils/visually-hidden';
 @import './utils/mixin';
@@ -8,6 +9,8 @@
 
 // compinents
 @import './components/container';
+@import './components/team-modal';
+@import './components/scroll-up-btn';
 
 // common
 @import './common';

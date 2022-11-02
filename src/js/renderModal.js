@@ -1,7 +1,9 @@
 import iconURL from '../img/symbol-defs.svg';
-export const backdrop = document.querySelector('.backdrop');
-import { getGenresByIds } from './galleryMarkup';
+// import { getGenresByIds } from './galleryMarkup';
+import { refs } from './refs';
+import { genres } from './ganresId';
 
+// Функція для рендеру модального вікна
 export function renderModal({
   poster_path,
   title,
@@ -14,17 +16,18 @@ export function renderModal({
   name,
   original_name,
 }) {
-  let genres = getGenresByIds(genre_ids);
+  let genresForModal = getGenresByIds(genre_ids);
   let poster = getPoster(poster_path);
 
-  if (!genres) {
-    genres = 'not available';
+  // перевірка на наявність жанрів
+  if (genresForModal.length === 0) {
+    genresForModal = 'not available';
   }
 
   const markup = /*html*/ `<div class="modal">
                         <button type="button" class="modal__btn-close" data-modal-close>
-                            <svg class="modal__icon-close" width="14" height="14">
-                            <use href="${iconURL}#icon-close-modal-btn"></use>
+                            <svg class="modal__icon-close" width="25px" height="25px">
+                            <use href="${iconURL}#icon-close_menu"></use>
                             </svg>
                         </button>
                         <div class="modal__image-thumb">
@@ -55,7 +58,7 @@ export function renderModal({
                         </tr>
                         <tr class="modal__info-entry">
                         <td class="modal__info-key">Genre</td>
-                        <td class="modal__info-value">${genres}</td>
+                        <td class="modal__info-value">${genresForModal}</td>
                         </tr>
                         </table>
                 
@@ -67,12 +70,21 @@ export function renderModal({
                         </div>
                         </div>
                     </div>`;
-  backdrop.innerHTML = markup;
+  refs.backdrop.innerHTML = markup;
 }
+
+//Функція для заміни постера у випадку його відсутності
 function getPoster(poster) {
   if (poster === null) {
     return 'https://upload.wikimedia.org/wikipedia/commons/6/64/Poster_not_available.jpg';
   } else {
     return `https://image.tmdb.org/t/p/w300/${poster}`;
   }
+}
+
+//Функція для виведення жанрів у модальне вікно
+function getGenresByIds(ids) {
+  return ids.map(id =>
+    genres.filter(genre => genre.id === id).map(genre => genre.name)
+  );
 }
