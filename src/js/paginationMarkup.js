@@ -13,30 +13,8 @@ export function createPaginationLayout({ page, total_pages }, query) {
   if (total_pages === 1 || total_pages < page) {
     return (refs.paginationList.innerHTML = '');
   }
-  
-  
   renderPagination(dataSet, page, total_pages, query);
-  
 }
-
-// if (page === 1) {
-//   console.log(refs.prevBtn);
-//   refs.prevBtn.disabled = true;
-// } else {
-//   refs.prevBtn.disabled = false;
-// }
-// if (page + 1 > total_pages) {
-//   refs.nextBtn.disabled = true;
-// } else {
-//   refs.nextBtn.disabled = false;
-// }
-// if (total_pages === 1) {
-//   refs.prevBtn.style.visibility = 'hidden';
-//   refs.nextBtn.style.visibility = 'hidden';
-// } else {
-//   refs.prevBtn.style.visibility = 'visible';
-//   refs.nextBtn.style.visibility = 'visible';
-// }
 
 function createArr(start, end) {
   const screenWidth = window.screen.width;
@@ -109,18 +87,12 @@ function renderPagination(arr, currentPage, lastPage, query) {
   markup.unshift`<li class="pagination__item"><button class="pagination__button arrow" type = "button" id = "prevBtn"> < </button></li>`;
   markup.push`<li class="pagination__item"><button class="pagination__button arrow" type = "button" id = "nextBtn"> > </button></li>`;
 
-
-
   refs.paginationList.innerHTML = '';
   refs.paginationList.insertAdjacentHTML('beforeend', markup.join(' '));
 
   const nextPage = document.querySelector('button#nextBtn');
-  console.log(nextPage);
   const prevPage = document.querySelector('button#prevBtn');
-  console.log(prevPage);
-  console.log(currentPage);
   if (currentPage === 1) {
-    
     prevPage.disabled = true;
   } else {
     prevPage.disabled = false;
@@ -138,30 +110,33 @@ function createPaginationBtn(page, query) {
   const paginationItem = document.querySelectorAll('.pagination__item button');
 
   paginationItem.forEach(item => {
-    item.addEventListener('click', e => {
-      if (e.target.id === 'prevBtn') {
-        API.page = Number(page);
-        return prevPage(API.page, query);
-      } else if (e.target.id === 'nextBtn') {
-        API.page = Number(page);
-        return nextPage(API.page, query);
-      } else if (e.target.id === 'dots_next') {
-        const numberApiPage = Number(page);
-        API.page = numberApiPage + 3;
-      } else if (e.target.id === 'dots_prev') {
-        const numberApiPage = Number(page);
-        API.page = numberApiPage - 3;
-      } else {
-        API.page = Number(e.target.id);
-      }
-      
-      if (query === '' || query === undefined) {
-        return renderPaginationOnPopular(API.page)
-      } else {
-        return renderPaginationOnSearch(API.page, query);
-      }
-      
-    }, onScrollUp(),);
+    item.addEventListener(
+      'click',
+      e => {
+        if (e.target.id === 'prevBtn') {
+          API.page = Number(page);
+          return prevPage(API.page, query);
+        } else if (e.target.id === 'nextBtn') {
+          API.page = Number(page);
+          return nextPage(API.page, query);
+        } else if (e.target.id === 'dots_next') {
+          const numberApiPage = Number(page);
+          API.page = numberApiPage + 3;
+        } else if (e.target.id === 'dots_prev') {
+          const numberApiPage = Number(page);
+          API.page = numberApiPage - 3;
+        } else {
+          API.page = Number(e.target.id);
+        }
+
+        if (query === '' || query === undefined) {
+          return renderPaginationOnPopular(API.page);
+        } else {
+          return renderPaginationOnSearch(API.page, query);
+        }
+      },
+      onScrollUp()
+    );
   });
 }
 
@@ -179,6 +154,3 @@ function nextPage(page, query) {
     return renderPaginationOnPopular(API.page);
   renderPaginationOnSearch(API.page, query);
 }
-
-
-
