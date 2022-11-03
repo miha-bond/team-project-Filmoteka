@@ -19,26 +19,24 @@ export function createPaginationLayout({ page, total_pages }, query) {
   
 }
 
-  // if (page === 1) {
-  //   console.log(refs.prevBtn);
-  //   refs.prevBtn.disabled = true;
-  // } else {
-  //   refs.prevBtn.disabled = false;
-  // }
-  // if (page + 1 > total_pages) {
-  //   refs.nextBtn.disabled = true;
-  // } else {
-  //   refs.nextBtn.disabled = false;
-  // }
-  // if (total_pages === 1) {
-  //   refs.prevBtn.style.visibility = 'hidden';
-  //   refs.nextBtn.style.visibility = 'hidden';
-  // } else {
-  //   refs.prevBtn.style.visibility = 'visible';
-  //   refs.nextBtn.style.visibility = 'visible';
-  // }
-  
-
+// if (page === 1) {
+//   console.log(refs.prevBtn);
+//   refs.prevBtn.disabled = true;
+// } else {
+//   refs.prevBtn.disabled = false;
+// }
+// if (page + 1 > total_pages) {
+//   refs.nextBtn.disabled = true;
+// } else {
+//   refs.nextBtn.disabled = false;
+// }
+// if (total_pages === 1) {
+//   refs.prevBtn.style.visibility = 'hidden';
+//   refs.nextBtn.style.visibility = 'hidden';
+// } else {
+//   refs.prevBtn.style.visibility = 'visible';
+//   refs.nextBtn.style.visibility = 'visible';
+// }
 
 function createArr(start, end) {
   const screenWidth = window.screen.width;
@@ -106,8 +104,6 @@ function renderPagination(arr, currentPage, lastPage, query) {
           </button>
         </li>
       `;
-
-      
   });
 
   markup.unshift`<li class="pagination__item"><button class="pagination__button arrow" type = "button" id = "prevBtn"> < </button></li>`;
@@ -136,12 +132,9 @@ function renderPagination(arr, currentPage, lastPage, query) {
   }
 
   createPaginationBtn(currentPage, query);
-  
 }
 
 function createPaginationBtn(page, query) {
-  
- 
   const paginationItem = document.querySelectorAll('.pagination__item button');
 
   paginationItem.forEach(item => {
@@ -162,9 +155,8 @@ function createPaginationBtn(page, query) {
         API.page = Number(e.target.id);
       }
       
-      if (query === '' ||  query === undefined) {
-        return renderPaginationOnPopular(API.page);
-        
+      if (query === '' || query === undefined) {
+        return renderPaginationOnPopular(API.page)
       } else {
         return renderPaginationOnSearch(API.page, query);
       }

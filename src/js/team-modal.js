@@ -1,4 +1,5 @@
-import * as basicLightbox from 'basiclightbox'
+import * as basicLightbox from 'basiclightbox';
+import { refs } from './refs';
 
 import mihabondUrl from '../img/team.jpg/miha-bond.jpg';
 import OlesiaTrUrl from '../img/team.jpg/Olesia.jpg';
@@ -11,7 +12,7 @@ import Evgenija26Url from '../img/team.jpg/Evgenija26.jpg';
 import ihorettiUrl from '../img/team.jpg/ihoretti.jpg';
 import perehrestvalentinaUrl from '../img/team.jpg/perehrestvalentina.jpg';
 import AlexandreElMaissUrl from '../img/team.jpg/AlexandreElMaiss.jpg';
-import githubUrl from '../img/symbol-defs.svg'
+import githubUrl from '../img/symbol-defs.svg';
 
 const markup = `<div class="team-wrapper">
     
@@ -139,14 +140,16 @@ const modal = basicLightbox.create(markup);
 
 function openModal(e) {
   modal.show(modal);
-  
+  refs.body.classList.toggle('no-scroll');
 
   window.addEventListener('keydown', closeModalHandler);
-   
+
   function closeModalHandler(e) {
     if (e.code === 'Escape') {
       modal.close();
       window.removeEventListener('keydown', closeModalHandler);
+
+      refs.body.classList.toggle('no-scroll');
     }
   }
 }

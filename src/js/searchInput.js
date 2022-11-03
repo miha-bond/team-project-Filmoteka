@@ -5,7 +5,6 @@ import initPage from './initPage';
 // import { options } from 'options-notiflix';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { renderPaginationOnSearch } from './paginationRequests';
 
 const filmsApi = new ThemoviedbAPI();
 
@@ -26,10 +25,7 @@ async function onFormSubmit(evt) {
     filmsApi.query = searchQuery;
     const searchFilms = await filmsApi.getMovieByName();
     renderPaginationOnSearch(filmsApi.page, filmsApi.query )
-    
-    console.log('27', searchFilms);
     if (searchFilms.total_results !== 0) {
-      console.log('29', searchFilms);
       Notify.success(
         `We found ${searchFilms.total_results} movies for your query`
       );
@@ -37,7 +33,6 @@ async function onFormSubmit(evt) {
       createMarkup(searchFilms);
       refs.searchFormRef.reset();
     } else if (searchFilms.total_results === 0) {
-      console.log('38', searchFilms);
       Notify.failure(
         'Sorry, there are no movies matching your search query. Please try again.'
       );
@@ -48,7 +43,6 @@ async function onFormSubmit(evt) {
     });
   } catch (error) {
     Notify.failure('Something went wrong! Please retry');
-    console.log(error);
   }
   Loading.remove();
 }

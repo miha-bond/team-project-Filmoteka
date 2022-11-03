@@ -3,15 +3,19 @@ import { genres } from './ganresId';
 import { save } from './storage';
 import { showCard } from './modalCard';
 
-
-
 function createMarkup({ results }) {
   save('currentPage', results);
-   results.map(createMarkupElement);
-refs.galleryItem.addEventListener('click', showCard)
+  results.map(createMarkupElement);
+  refs.galleryItem.addEventListener('click', showCard);
 }
 
- function createMarkupElement ({ poster_path, title, genre_ids, release_date, id }) {
+function createMarkupElement({
+  poster_path,
+  title,
+  genre_ids,
+  release_date,
+  id,
+}) {
   const genres = getGenresByIds(genre_ids);
   const date = new Date(release_date);
   const releaseDate = date.getFullYear();
@@ -26,7 +30,7 @@ refs.galleryItem.addEventListener('click', showCard)
     </div>
 </div>
 </li>`;
-refs.galleryItem.insertAdjacentHTML('beforeend', markupString );
+  refs.galleryItem.insertAdjacentHTML('beforeend', markupString);
 }
 
 function getGenresByIds(ids) {
@@ -49,4 +53,4 @@ function getPoster(poster) {
     return `https://image.tmdb.org/t/p/w300/${poster}`;
   }
 }
-export { getGenresByIds, createMarkup, createMarkupElement};
+export { getGenresByIds, createMarkup, createMarkupElement };
