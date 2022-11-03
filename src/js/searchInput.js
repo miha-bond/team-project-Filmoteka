@@ -24,6 +24,7 @@ async function onFormSubmit(evt) {
   try {
     filmsApi.query = searchQuery;
     const searchFilms = await filmsApi.getMovieByName();
+    renderPaginationOnSearch(filmsApi.page, filmsApi.query )
     if (searchFilms.total_results !== 0) {
       Notify.success(
         `We found ${searchFilms.total_results} movies for your query`

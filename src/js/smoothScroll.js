@@ -1,0 +1,3 @@
+export function onScrollUp() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
