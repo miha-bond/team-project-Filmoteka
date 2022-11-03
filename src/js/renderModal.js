@@ -51,7 +51,7 @@ export function renderModal({
                       
                         </div>    
                         <div class="modal__info-thumb">
-                        <h2 class="modal__title">$
+                        <h2 class="modal__title">${
                           name || original_title || original_name
                         }</h2>
                         <table class="modal__info">
