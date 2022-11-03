@@ -29,16 +29,16 @@
 //   }
 // }
 .film_title {
-  width: 280px
+  width: 280px;
   font-family: 'Roboto';
   font-weight: 500;
   font-size: 12px;
   line-height: calc(16 / 12);
   @media screen and (min-width: 768px) {
-    width: 340px
+    width: 340px;
   }
   @media screen and (min-width: 1280px) {
-    width: 400px
+    width: 400px;
     font-size: 20px;
     line-height: calc(24 / 20);
   }
