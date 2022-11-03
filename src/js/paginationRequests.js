@@ -1,6 +1,6 @@
 import ThemoviedbAPI from './themoviedbAPI';
 import { refs } from './refs';
-import createMarkup from './galleryMarkup';
+import {createMarkup} from './galleryMarkup';
 import { createPaginationLayout } from './paginationMarkup';
 
 const API = new ThemoviedbAPI();

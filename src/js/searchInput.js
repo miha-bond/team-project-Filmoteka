@@ -1,5 +1,5 @@
 import ThemoviedbAPI from './themoviedbAPI';
-import createMarkup from './galleryMarkup';
+import {createMarkup} from './galleryMarkup';
 import { refs } from './refs';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';

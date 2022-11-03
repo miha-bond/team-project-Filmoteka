@@ -1,5 +1,5 @@
 import ThemoviedbAPI from './themoviedbAPI';
-import createMarkup from './galleryMarkup';
+import {createMarkup} from './galleryMarkup';
 import { refs } from './refs';
 
 const API = new ThemoviedbAPI();

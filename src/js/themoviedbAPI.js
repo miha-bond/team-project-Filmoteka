@@ -45,7 +45,7 @@ export default class ThemoviedbAPI {
   async getTrailer(id) {
     const urlAXIOS = `movie/${id}/videos?api_key=${KEY}&language=en-US`;
     const { data } = await axios.get(urlAXIOS);
-    return data;
+    return data.results[0].key;
   }
 
   async getUpcomingMovies() {
