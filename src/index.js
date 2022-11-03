@@ -6,6 +6,4 @@ import './js/renderModal';
 import './js/searchInput';
 import './js/team-modal';
 import './js/videotube';
-// import './js/themeColor';
-// import './js/storageThemeColor';
 import './js/scroll-up-btn';
