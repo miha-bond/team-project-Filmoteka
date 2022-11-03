@@ -1,23 +1,26 @@
 .gallery {
   flex: 1 1 auto;
+  margin: 0 auto;
 }
 .gallery__list {
+  max-width: 95vw;
   padding-top: 20px;
   padding-bottom: 20px;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  // flex-wrap: wrap;
   gap: 30px;
 }
 
-.gallery__item {
-  width: 100%;
-  @media screen and (min-width: 768px) {
-    width: calc((100% - 30px) / 2);
-  }
-  @media screen and (min-width: 1280px) {
-    width: calc((100% - 60px) / 3);
-  }
-}
+// .gallery__item {
+//   width: 100%;
+//   @media screen and (min-width: 768px) {
+//     width: calc((100% - 30px) / 2);
+//   }
+//   @media screen and (min-width: 1280px) {
+//     width: calc((100% - 60px) / 3);
+//   }
+// }
 .film_title {
   font-family: 'Roboto';
   font-weight: 500;
@@ -46,8 +49,8 @@
   }
 }
 .img {
-  height: 400px;
-  width: 280px;
+  height: 100%;
+  width: 100%;
   display: block;
   border-radius: 5px;
   margin-bottom: 10px;
