@@ -44,14 +44,14 @@ export function renderModal({
                             <use href="${iconURL}#icon-close_menu"></use>
                             </svg>
                         </button>
-                        <div class="modal__image-thumb portfolio__top-wrap">
+                        <div class="modal__image-thumb trailer__wrap">
                         <img class="modal__image" src="${poster}" alt="${title} poster">
-                        <button type="button" class="modal__btn portfolio__hover-text modal__btn-watched">
-                          <a href="https://youtu.be/hf8EYbVxtCY" class="card__link  link tube">Watch ${title} trailer</a>
-                        </button>
-                        </div>
+                        
+                        <a href="https://youtu.be/hf8EYbVxtCY" class="modal__btn trailer__btn card__link link tube">Watch <br> trailer </br> </a>
+                      
+                        </div>    
                         <div class="modal__info-thumb">
-                        <h2 class="modal__title">${
+                        <h2 class="modal__title">$
                           name || original_title || original_name
                         }</h2>
                         <table class="modal__info">
@@ -80,7 +80,7 @@ export function renderModal({
                         </table>
                 
                         <h3 class="modal__about">About</h3>
-                        <p class="modal__about-text">${overview}</p>
+                        <article class="modal__about-text movie-review">${overview}</article>
                         <div class="modal__btn-container">
                         <button id="watched" type="button" class="modal__btn modal__btn-watched">add to Watched</button>
                         <button id="queue" type="button" class="modal__btn modal__btn-queue">add to queue</button>
