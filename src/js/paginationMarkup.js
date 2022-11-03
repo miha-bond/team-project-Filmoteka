@@ -15,26 +15,24 @@ export function createPaginationLayout({ page, total_pages }, query) {
   renderPagination(dataSet, page, total_pages, query);
 }
 
-  // if (page === 1) {
-  //   console.log(refs.prevBtn);
-  //   refs.prevBtn.disabled = true;
-  // } else {
-  //   refs.prevBtn.disabled = false;
-  // }
-  // if (page + 1 > total_pages) {
-  //   refs.nextBtn.disabled = true;
-  // } else {
-  //   refs.nextBtn.disabled = false;
-  // }
-  // if (total_pages === 1) {
-  //   refs.prevBtn.style.visibility = 'hidden';
-  //   refs.nextBtn.style.visibility = 'hidden';
-  // } else {
-  //   refs.prevBtn.style.visibility = 'visible';
-  //   refs.nextBtn.style.visibility = 'visible';
-  // }
-  
-
+// if (page === 1) {
+//   console.log(refs.prevBtn);
+//   refs.prevBtn.disabled = true;
+// } else {
+//   refs.prevBtn.disabled = false;
+// }
+// if (page + 1 > total_pages) {
+//   refs.nextBtn.disabled = true;
+// } else {
+//   refs.nextBtn.disabled = false;
+// }
+// if (total_pages === 1) {
+//   refs.prevBtn.style.visibility = 'hidden';
+//   refs.nextBtn.style.visibility = 'hidden';
+// } else {
+//   refs.prevBtn.style.visibility = 'visible';
+//   refs.nextBtn.style.visibility = 'visible';
+// }
 
 function createArr(start, end) {
   const screenWidth = window.screen.width;
@@ -102,8 +100,6 @@ function renderPagination(arr, currentPage, lastPage, query) {
           </button>
         </li>
       `;
-
-      
   });
 
   markup.unshift`<li class="pagination__item"><button class="pagination__button arrow" type = "button" id = "prevBtn"><svg class="pagination__icon" width="16px" height="16px"  id = "prevBtnSvg">
@@ -119,12 +115,9 @@ function renderPagination(arr, currentPage, lastPage, query) {
   refs.paginationList.insertAdjacentHTML('beforeend', markup.join(' '));
 
   createPaginationBtn(currentPage, query);
-  
 }
 
 function createPaginationBtn(page, query) {
-  
- 
   const paginationItem = document.querySelectorAll('.pagination__item button');
 
   paginationItem.forEach(item => {
@@ -132,7 +125,7 @@ function createPaginationBtn(page, query) {
       if (e.target.id === 'prevBtn' || e.target.id === 'prevBtnSvg') {
         API.page = Number(page);
         return prevPage(API.page, query);
-      } else if (e.target.id === 'nextBtn' ||  e.target.id === 'nextBtnSvg') {
+      } else if (e.target.id === 'nextBtn' || e.target.id === 'nextBtnSvg') {
         API.page = Number(page);
         return nextPage(API.page, query);
       } else if (e.target.id === 'dots_next') {
@@ -144,7 +137,7 @@ function createPaginationBtn(page, query) {
       } else {
         API.page = Number(e.target.id);
       }
-      if (query === '' ||  query === undefined) {
+      if (query === '' || query === undefined) {
         return renderPaginationOnPopular(API.page);
       } else {
         return renderPaginationOnSearch(API.page, query);
