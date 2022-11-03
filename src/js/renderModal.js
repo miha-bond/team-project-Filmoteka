@@ -9,8 +9,10 @@ const API = new ThemoviedbAPI();
 async function key(id) {
   const keyFilms1 = await API.getTrailer(id).then(keyFilm => keyFilm);
   save('wotchTrailer', keyFilms1);
-  console.log('keyFilms1', keyFilms1);
 }
+
+
+//  !!!!!! ШО  ЗА ХРІНЬЬЬ!!
 
 // Функція для рендеру модального вікна
 export function renderModal({
@@ -36,7 +38,7 @@ export function renderModal({
     genresForModal = 'not available';
   }
 
-  const markup = /*html*/ `<div class="modal">
+  const markup = /*html*/ `<div class="modal" id="${id}">
                         <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="25px" height="25px">
                             <use href="${iconURL}#icon-close_menu"></use>
@@ -44,7 +46,7 @@ export function renderModal({
                         </button>
                         <div class="modal__image-thumb portfolio__top-wrap">
                         <img class="modal__image" src="${poster}" alt="${title} poster">
-                        <button id="watched" type="button" class="modal__btn portfolio__hover-text modal__btn-watched">
+                        <button type="button" class="modal__btn portfolio__hover-text modal__btn-watched">
                           <a href="https://youtu.be/hf8EYbVxtCY" class="card__link  link tube">Watch ${title} trailer</a>
                         </button>
                         </div>

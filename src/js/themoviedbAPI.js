@@ -45,7 +45,6 @@ export default class ThemoviedbAPI {
   async getTrailer(id) {
     const urlAXIOS = `movie/${id}/videos?api_key=${KEY}&language=en-US`;
     const { data } = await axios.get(urlAXIOS);
-    console.log('getTrailer', data.results[0].key);
     return data.results[0].key;
   }
 

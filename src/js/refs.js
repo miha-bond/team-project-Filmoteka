@@ -8,4 +8,6 @@ export const refs = {
   backdrop: document.querySelector('.backdrop'),
   renderModal: document.querySelector('.gallery__list'),
   body: document.querySelector('body'),
+  watcLbBtn: document.querySelector('[data-watched]'),
+  queBtn: document.querySelector('[data-queue]'),
 };

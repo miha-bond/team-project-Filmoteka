@@ -1,33 +1,32 @@
 import { refs } from './refs';
 import { genres } from './ganresId';
-import { load, remove, save } from './storage';
+import { save } from './storage';
+import { showCard } from './modalCard';
 
 
 
-export default function createMarkup({ results }) {
+function createMarkup({ results }) {
   save('currentPage', results);
-  let markup = results.map(
-    ({ poster_path, title, genre_ids, release_date, id }) => {
-      const genres = getGenresByIds(genre_ids);
-      const date = new Date(release_date);
-      const releaseDate = date.getFullYear();
-      
-      
-      const poster = getPoster(poster_path);
-      return `
-      <li class="gallery__item">
-<div class="card">
-    <img class='img' id="${id}" src="${poster}" alt="${title}"  />
+   results.map(createMarkupElement);
+refs.galleryItem.addEventListener('click', showCard)
+}
 
-        <div class="film_info">
-            <h2 class="film_title"> ${title} </h2>
-            <p class="film_text"> <span class='film_text_border'>${genres}</span> ${releaseDate}</p>
-        </div>
+ function createMarkupElement ({ poster_path, title, genre_ids, release_date, id }) {
+  const genres = getGenresByIds(genre_ids);
+  const date = new Date(release_date);
+  const releaseDate = date.getFullYear();
+  const poster = getPoster(poster_path);
+  const markupString = `
+  <li class="gallery__item"  id="${id}">
+<div class="card">
+<img class='img'  src="${poster}" alt="${title}"  />
+<div class="film_info">
+        <h2 class="film_title"> ${title} </h2>
+        <p class="film_text"> <span class='film_text_border'>${genres}</span> ${releaseDate}</p>
+    </div>
 </div>
 </li>`;
-    }
-  );
-  refs.galleryItem.insertAdjacentHTML('beforeend', markup.join(''));
+refs.galleryItem.insertAdjacentHTML('beforeend', markupString );
 }
 
 function getGenresByIds(ids) {
@@ -50,4 +49,4 @@ function getPoster(poster) {
     return `https://image.tmdb.org/t/p/w300/${poster}`;
   }
 }
-export { getGenresByIds };
+export { getGenresByIds, createMarkup, createMarkupElement};
