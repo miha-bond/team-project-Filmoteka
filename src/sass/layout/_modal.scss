@@ -2,6 +2,19 @@
   cursor: pointer;
 }
 
+// body {
+//   display: flex;
+//   flex-direction: column;
+//   height: 100vh;
+
+//   font-family: 'Roboto', sans-serif;
+//   font-weight: 500;
+//   font-size: 12px;
+//   line-height: 1.333;
+
+//   transition: all 0.3s ease 0s;
+// }
+
 .no-scroll {
   overflow: hidden;
 }
@@ -110,6 +123,14 @@
 }
 
 .modal__info-thumb {
+  font-family: 'Roboto';
+  font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 1.333;
+  
+    transition: all 0.3s ease 0s;
+
   @include tablet {
     width: 264px;
   }
@@ -190,6 +211,7 @@
   margin-bottom: 8px;
 
   font-size: 12px;
+  line-height: 16px;
   text-transform: uppercase;
 }
 
@@ -197,7 +219,7 @@
   margin-bottom: 20px;
 
   font-size: 12px;
-  line-height: 1.7;
+  line-height: 20px;
 }
 
 .modal__btn-container {
