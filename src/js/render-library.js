@@ -51,7 +51,6 @@ export function viewQue() {
 
 export function viewWt() {
   let watchedStorageData = load('watched');
-  console.log(watchedStorageData);
   let currentStorageData = load('currentPage');
 
   if (watchedStorageData.length !== 0) {

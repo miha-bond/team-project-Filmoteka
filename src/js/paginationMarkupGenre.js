@@ -10,33 +10,13 @@ import { onScrollUp } from './smoothScroll';
 const API = new ThemoviedbAPI();
 
 export function createPaginationLayoutGenre({ page, total_pages }, genreId) {
+  if (total_pages > 500) total_pages = 500;
   const dataSet = createArr(page, total_pages);
   if (total_pages === 1 || total_pages < page) {
     return (refs.paginationList.innerHTML = '');
   }
   renderPagination(dataSet, page, total_pages, genreId);
 }
-
-  // if (page === 1) {
-  //   console.log(refs.prevBtn);
-  //   refs.prevBtn.disabled = true;
-  // } else {
-  //   refs.prevBtn.disabled = false;
-  // }
-  // if (page + 1 > total_pages) {
-  //   refs.nextBtn.disabled = true;
-  // } else {
-  //   refs.nextBtn.disabled = false;
-  // }
-  // if (total_pages === 1) {
-  //   refs.prevBtn.style.visibility = 'hidden';
-  //   refs.nextBtn.style.visibility = 'hidden';
-  // } else {
-  //   refs.prevBtn.style.visibility = 'visible';
-  //   refs.nextBtn.style.visibility = 'visible';
-  // }
-  
-
 
 function createArr(start, end) {
   const screenWidth = window.screen.width;
@@ -104,8 +84,6 @@ function renderPagination(arr, currentPage, lastPage, genreId) {
           </button>
         </li>
       `;
-
-      
   });
 
   markup.unshift`<li class="pagination__item"><button class="pagination__button arrow" type = "button" id = "prevBtn"> < </button></li>`;
@@ -113,16 +91,10 @@ function renderPagination(arr, currentPage, lastPage, genreId) {
 
   refs.paginationList.innerHTML = '';
   refs.paginationList.insertAdjacentHTML('beforeend', markup.join(' '));
-  console.log(currentPage);
   let nextPage = document.querySelector('button#nextBtn');
-  console.log(nextPage);
   let prevPage = document.querySelector('button#prevBtn');
-  console.log(prevPage);
-  console.log(currentPage);
-  console.log(lastPage);
- 
+
   if (currentPage === 1) {
-    
     prevPage.disabled = true;
   } else {
     prevPage.disabled = false;
@@ -133,45 +105,44 @@ function renderPagination(arr, currentPage, lastPage, genreId) {
     nextPage.disabled = false;
   }
   createPaginationBtn(currentPage, genreId);
-  
 }
 
 function createPaginationBtn(page, genreId) {
-  
- 
   const paginationItem = document.querySelectorAll('.pagination__item button');
 
   paginationItem.forEach(item => {
-    item.addEventListener('click', e => {
-      if (e.target.id === 'prevBtn') {
-        API.page = Number(page);
-        return prevPage(API.page, genreId);
-      } else if (e.target.id === 'nextBtn') {
-        API.page = Number(page);
-        return nextPage(API.page, genreId);
-      } else if (e.target.id === 'dots_next') {
-        const numberApiPage = Number(page);
-        API.page = numberApiPage + 3;
-      } else if (e.target.id === 'dots_prev') {
-        const numberApiPage = Number(page);
-        API.page = numberApiPage - 3;
-      } else {
-        API.page = Number(e.target.id);
-      }
-      if (genreId === '' ||  genreId === undefined) {
-        return renderPaginationOnPopular(API.page);
-      } else {
-        return renderPaginationOngenreId(API.page, genreId);
-      }
-        
-      
-    }, onScrollUp(),);
+    item.addEventListener(
+      'click',
+      e => {
+        if (e.target.id === 'prevBtn') {
+          API.page = Number(page);
+          return prevPage(API.page, genreId);
+        } else if (e.target.id === 'nextBtn') {
+          API.page = Number(page);
+          return nextPage(API.page, genreId);
+        } else if (e.target.id === 'dots_next') {
+          const numberApiPage = Number(page);
+          API.page = numberApiPage + 3;
+        } else if (e.target.id === 'dots_prev') {
+          const numberApiPage = Number(page);
+          API.page = numberApiPage - 3;
+        } else {
+          API.page = Number(e.target.id);
+        }
+        if (genreId === '' || genreId === undefined) {
+          return renderPaginationOnPopular(API.page);
+        } else {
+          return renderPaginationOngenreId(API.page, genreId);
+        }
+      },
+      onScrollUp()
+    );
   });
 }
 
 function prevPage(page, genreId) {
   API.page = Number(page);
-  if (genreId === '' ||  genreId === undefined) {
+  if (genreId === '' || genreId === undefined) {
     return renderPaginationOnPopular(API.page);
   } else {
     return renderPaginationOngenreId(API.page, genreId);
@@ -180,7 +151,7 @@ function prevPage(page, genreId) {
 function nextPage(page, genreId) {
   API.page = Number(page);
   API.incrementPage();
-  if (genreId === '' ||  genreId === undefined) {
+  if (genreId === '' || genreId === undefined) {
     return renderPaginationOnPopular(API.page);
   } else {
     return renderPaginationOngenreId(API.page, genreId);
