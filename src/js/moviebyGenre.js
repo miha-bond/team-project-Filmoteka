@@ -1,6 +1,7 @@
 import ThemoviedbAPI from './themoviedbAPI';
 import {createMarkup} from './galleryMarkup';
 import { refs } from './refs';
+import { renderPaginationOngenreId } from './paginationRequests';
 
 const API = new ThemoviedbAPI();
 renderMoviebyGenre();
@@ -17,4 +18,5 @@ async function main() {
   const movieByGenre = await API.getMoviebyGenre();
   refs.galleryItem.innerHTML = '';
   createMarkup(movieByGenre);
+  renderPaginationOngenreId(API.page, API.genreId);
 }
