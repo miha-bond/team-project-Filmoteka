@@ -53,28 +53,28 @@ export async function showCard(e) {
 function onCloseBtn(e) {
   const card = document.getElementById(e.target.parentNode.parentNode.id);
   if (
-    (document.title === 'Page Queue' &&
+    (document.title === 'My library' &&
       document
         .querySelector('[data-watched]')
         .classList.contains(buttonIsOnClassName) &&
       document
         .querySelector('#queue')
         .classList.contains(buttonIsOnClassName)) ||
-    (document.title === 'Page Queue' &&
+    (document.title === 'My library' &&
       document
         .querySelector('[data-queue]')
         .classList.contains(buttonIsOnClassName) &&
       document
         .querySelector('#watched')
         .classList.contains(buttonIsOnClassName)) ||
-    (document.title === 'Page Queue' &&
+    (document.title === 'My library' &&
       document
         .querySelector('[data-watched]')
         .classList.contains(buttonIsOnClassName) &&
       !document
         .querySelector('#watched')
         .classList.contains(buttonIsOnClassName)) ||
-    (document.title === 'Page Queue' &&
+    (document.title === 'My library' &&
       document
         .querySelector('[data-queue]')
         .classList.contains(buttonIsOnClassName) &&
