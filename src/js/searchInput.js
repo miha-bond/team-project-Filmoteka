@@ -7,6 +7,8 @@ import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { renderPaginationOnSearch } from './paginationRequests';
 
+if (refs.searchFormRef === null) return;
+
 const filmsApi = new ThemoviedbAPI();
 
 refs.searchFormRef.addEventListener('submit', onFormSubmit);
