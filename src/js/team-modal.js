@@ -142,12 +142,23 @@ function openModal(e) {
   modal.show(modal);
   refs.body.classList.toggle('no-scroll');
 
-  window.addEventListener('keydown', closeModalHandler);
+  document.addEventListener('keydown', closeModalHandler);
 
   function closeModalHandler(e) {
     if (e.code === 'Escape') {
       modal.close();
-      window.removeEventListener('keydown', closeModalHandler);
+      document.removeEventListener('keydown', closeModalHandler);
+
+      refs.body.classList.toggle('no-scroll');
+    }
+  }
+
+  document.addEventListener('click', closeModalOnClick);
+
+  function closeModalOnClick(e) {
+    if (e.target.classList.value === 'basicLightbox') {
+      modal.close();
+      document.removeEventListener('click', closeModalOnClick);
 
       refs.body.classList.toggle('no-scroll');
     }
