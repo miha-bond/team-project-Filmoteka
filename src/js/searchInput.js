@@ -2,7 +2,7 @@ import ThemoviedbAPI from './themoviedbAPI';
 import { createMarkup } from './galleryMarkup';
 import { refs } from './refs';
 import initPage from './initPage';
-import options from './options_notiflix';
+import { options } from './options_notiflix';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { renderPaginationOnSearch } from './paginationRequests';
