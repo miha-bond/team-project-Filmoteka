@@ -19,15 +19,6 @@
   }
 }
 
-// .gallery__item {
-//   width: 100%;
-//   @media screen and (min-width: 768px) {
-//     width: calc((100% - 30px) / 2);
-//   }
-//   @media screen and (min-width: 1280px) {
-//     width: calc((100% - 60px) / 3);
-//   }
-// }
 .film_title {
   width: 280px;
   font-family: 'Roboto';
@@ -43,29 +34,29 @@
     line-height: calc(24 / 20);
   }
 }
+
 .film_text {
   color: #ff6b08;
   font-family: Roboto;
   font-size: 12px;
   font-weight: 500;
   line-height: calc(16 / 12);
-
   text-align: left;
-  @media screen and (min-width: 768px) {
-  }
+
   @media screen and (min-width: 1280px) {
     font-size: 20px;
     line-height: calc(24 / 20);
   }
 }
+
 .img {
   height: 100%;
   width: 100%;
   display: block;
   border-radius: 5px;
   margin-bottom: 10px;
-
   width: 100%;
+
   @media screen and (min-width: 768px) {
     width: 340px;
     height: 455px;
@@ -75,6 +66,16 @@
     height: 570px;
   }
 }
+
+.gallery__item:hover .img {
+  position: relative;
+  box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.77);
+  -webkit-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.77);
+  -moz-box-shadow: 0px 0px 30px 0px rgba(0, 0, 0, 0.77);
+  transform: scale(1.05) skew(1deg) rotate(2deg);
+  transition: transform(scale) 1500ms cubic-bezier(0.85, 0.67, 0.04, 0.4);
+}
+
 .film_text_border {
   border-right: 1px solid;
   padding-right: 5px;
