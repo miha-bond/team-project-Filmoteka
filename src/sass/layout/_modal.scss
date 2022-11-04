@@ -122,11 +122,11 @@
 .modal__info-thumb {
   font-family: 'Roboto';
   font-style: normal;
-    font-weight: 500;
-    font-size: 12px;
-    line-height: 1.333;
-  
-    transition: all 0.3s ease 0s;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 1.333;
+
+  transition: all 0.3s ease 0s;
 
   @include tablet {
     width: 264px;
@@ -148,6 +148,7 @@
   font-size: 20px;
   font-weight: 500;
   text-transform: uppercase;
+  color: #000000;
 
   @include desktop {
     font-size: 30px;
@@ -246,7 +247,7 @@
   transform: scale(1);
   transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1),
     transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
-cursor: pointer;
+  cursor: pointer;
   @include tablet {
     width: 125px;
   }
@@ -274,35 +275,36 @@ cursor: pointer;
   }
 }
 
-  .trailer__btn {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    font-style: normal;
-    font-family: 'Roboto';
-    font-style: normal;
-    font-size: 24px;
-    font-weight: 500;
-    text-transform: uppercase;
-    padding: 25%;
-    height: 50%;
-    width: 100%;
-    transform: translateY(200%);
-    transition: transform 300ms linear;
-    background: rgba(255, 119, 0, 0.435);
-    .trailer__wrap:hover &,
-    .trailer__wrap:focus & {
-      transform: translateY(100%);
-    }
+.trailer__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  font-style: normal;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-size: 24px;
+  font-weight: 500;
+  text-transform: uppercase;
+  padding: 25%;
+  height: 50%;
+  width: 100%;
+  border: none;
+  transform: translateY(200%);
+  transition: transform 300ms linear;
+  background: rgba(255, 119, 0, 0.435);
+  .trailer__wrap:hover &,
+  .trailer__wrap:focus & {
+    transform: translateY(100%);
   }
-  .trailer__wrap {
-    position: relative;
-    overflow: hidden;
-  }
+}
+.trailer__wrap {
+  position: relative;
+  overflow: hidden;
+}
 
 .is-on {
   color: #fff;
@@ -310,13 +312,14 @@ cursor: pointer;
   background-color: var(--color-hoverfocus);
   box-shadow: 0px 0px 32px 6px #ff6b01bd;
   -webkit-box-shadow: 0px 0px 32px 6px #ff6b01bd;
-  -moz-box-shadow: 0px 0px 32px 6px #ff6b01bd;     }
+  -moz-box-shadow: 0px 0px 32px 6px #ff6b01bd;
+}
 
 .movie-review {
   display: block;
   line-height: 1.7;
   margin-bottom: 15px;
-  height: 60px;
+  height: 160px;
   overflow: hidden;
   min-width: 240px;
   font-family: Roboto, sans-serif;
