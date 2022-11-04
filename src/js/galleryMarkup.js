@@ -9,6 +9,7 @@ function createMarkup({ results }) {
   save('currentPage', results);
    results.map(createMarkupElement);
 refs.galleryItem.addEventListener('click', showCard)
+
 }
 
  function createMarkupElement ({ poster_path, title, genre_ids, release_date, id }) {

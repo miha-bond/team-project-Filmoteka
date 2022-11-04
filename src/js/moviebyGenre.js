@@ -6,7 +6,7 @@ const API = new ThemoviedbAPI();
 renderMoviebyGenre();
 export function renderMoviebyGenre() {
   const genresItem = document.querySelector('#genres');
-  genresItem.addEventListener('change', e => {
+  genresItem.addEventListener('change', () => {
     API.genreId = genresItem.value;
 
     main();

@@ -1,84 +1,129 @@
 import {Notify} from 'notiflix';
 import { refs } from "./refs";
 import { load } from "./storage";
-import {initStorage} from "./storage-proceccing";
 import { createMarkupElement} from "./galleryMarkup";
-import initPage from "./initPage";
-import {buttonIsOnClassName} from "./modalCard"
+import {showCard} from "./modalCard";
 
-if(refs.watcLbBtn.classList.contains(buttonIsOnClassName)){
-    refs.watcLbBtn.classList.remove(buttonIsOnClassName); 
-}else if (refs.queBtn.classList.contains(buttonIsOnClassName)){
-    refs.queBtn.classList.remove(buttonIsOnClassName);  
+
+
+const text = 'Add movie to library!';
+const params = {
+    position: 'center-center',
+    width: '55vw',
+    fontSize: '75px',
+    fontFamily:'Verdana',
+    failure: {
+        background: '#000000dd',
+      textColor: '#ff0000',
+    }
+    };
+if(document.title === 'Page Queue') {
+resetLibrary();
+libraryClassInspect();
+
+refs.galleryItem.innerHTML = '';
+
+initLibrary()
+
 }
 
- refs.watcLbBtn.addEventListener('click', viewWt);
-refs.queBtn.addEventListener('click', viewQue);
 
-
-export function viewQue () {
-  
-
-        let queStorageData = load('queue');
-        let currentStorageData = load('currentPage');
-    
-        if (queStorageData.length !==0 ) {
-        refs.queBtn.classList.add(buttonIsOnClassName);
-       
-         
-        if(refs.watcLbBtn.classList.contains(buttonIsOnClassName)) {
-            refs.watcLbBtn.classList.remove(buttonIsOnClassName); 
-        }
+function viewQue () {
+    let currentP = load('currentPage');
+  let queStorageData = load('queue');
+       refs.queBtn.classList.add('is-on');
+       if(refs.watcLbBtn.classList.contains('is-on')) {
+        refs.watcLbBtn.classList.remove('is-on')
+       }
         queStorageData = queStorageData.map(el => Number(el));
-        currentStorageData =
-        currentStorageData.filter(el => queStorageData.includes(el.id));
+        currentP =
+        currentP.filter(el => queStorageData.includes(el.id));
         refs.galleryItem.innerHTML = '';
-        currentStorageData.map( createMarkupElement);
-        } else {
-        Notify.failure('Add movie to QUEUE!', {
-            position: 'center-center',
-            width: '45vw',
-            fontSize: '50px',
-            fontFamily:'Verdana',
-            failure: {
-                background: '#000000dd',
-              textColor: '#ff0000',
-            }
-            }); initPage()
-            return
+        currentP.map( createMarkupElement);
+        refs.galleryItem.addEventListener('click', showCard)
         }
-    }
+    
 
 
-export function viewWt() {
-
+ function viewWt() {
+    let currentP = load('currentPage');
     let watchedStorageData = load('watched');
-    console.log(watchedStorageData);
-    let currentStorageData = load('currentPage');
-  
-    if (watchedStorageData.length !==0 ) {
-    refs.watcLbBtn.classList.add(buttonIsOnClassName);
-   
-     
-    if(refs.queBtn.classList.contains(buttonIsOnClassName)) {
-        refs.queBtn.classList.remove(buttonIsOnClassName); 
-    }
+  refs.watcLbBtn.classList.add('is-on');
+  if(refs.queBtn.classList.contains('is-on')) {
+  refs.queBtn.classList.remove('is-on');
+}
     watchedStorageData = watchedStorageData.map(el => Number(el));
-    currentStorageData =
-    currentStorageData.filter(el => watchedStorageData.includes(el.id));
+    currentP =
+    currentP.filter(el => watchedStorageData.includes(el.id));
     refs.galleryItem.innerHTML = '';
-    currentStorageData.map( createMarkupElement);
-    } else {
-    Notify.failure('Add movie to WATCHED!', {
-        position: 'center-center',
-        width: '45vw',
-        fontSize: '50px',
-        fontFamily:'Verdana',
-        failure: {
-            background: '#000000dd',
-          textColor: '#ff0000',
-        }
-        }); initPage()
-        return
+    currentP.map( createMarkupElement);
+    refs.galleryItem.addEventListener('click', showCard)
+    } 
+
+
+
+function isValid (v) {
+    if (load(v) && load(v) !== 0) {
+        return load(v);
     }
-  }
+}
+function resetLibrary () {
+    if(! isValid('watched') && ! isValid('queue')) {
+        itsNotMovies();
+           }
+
+}
+
+function initLibrary () {
+    let currentP = load('currentPage');
+
+            if( load('watched').length !==0 &&  load('queue').length === 0 || load('watched').length !==0 && ! load('queue')) {
+
+                document.querySelector('[data-queue]').disabled = true;
+let library = load('watched');
+library = library.map(el => Number(el));
+library =  currentP.filter(el => library.includes(el.id));
+currentP.map( createMarkupElement);
+refs.galleryItem.addEventListener('click', showCard);
+refs.watcLbBtn.addEventListener('click', viewWt);
+return
+} else if(load('queue').length !==0 && load('watched').length === 0 || load('queue').length !==0 && ! load('watched')) {
+            document.querySelector('[data-watched]').disabled = true;
+            let library = load('queue')
+            library = library.map(el => Number(el));
+            library =  currentP.filter(el => library.includes(el.id));
+            library.map( createMarkupElement);
+            refs.galleryItem.addEventListener('click', showCard);
+            refs.queBtn.addEventListener('click', viewQue);
+            return
+         } else {
+            let library = [...load('watched'), ... load('queue')];
+            library = library.map(el => Number(el));
+        currentP =  currentP.filter(el => library.includes(el.id));
+        currentP.map( createMarkupElement);
+        refs.galleryItem.addEventListener('click', showCard);
+        refs.watcLbBtn.addEventListener('click', viewWt);
+        refs.queBtn.addEventListener('click', viewQue);
+        return
+        }
+      return
+}
+
+
+function libraryClassInspect () { 
+   
+        if(document.querySelector('[data-watched]').classList.contains('is-on')){
+            document.querySelector('[data-watched]').classList.remove('is-on'); 
+        }else if (document.querySelector('[data-queue]').classList.contains('is-on')){
+            document.querySelector('[data-queue]').classList.remove('is-on');  
+        }
+    
+return
+}
+
+export function itsNotMovies (){
+    Notify.failure(text, params);
+    setTimeout(() => {
+       document.querySelector('[data-href]').dispatchEvent(new MouseEvent('click'));
+    }, 1800);
+}

@@ -1,14 +1,13 @@
 import { renderModal } from './renderModal';
 
-import { load, save } from './storage';
+import { load} from './storage';
 import { refs } from './refs';
 
 import {initStorage, toggleToWatched,
 toggleToQueue } from "./storage-proceccing";
-import initPage from './initPage';
 
-export const buttonIsOnClassName = 'is-on';
-export function showCard(e) {
+const buttonIsOnClassName = 'is-on';
+export async function showCard(e) {
   e.preventDefault();
    if(e.target.nodeName === "IMG" || e.target.nodeName === "H2" || e.target.nodeName === "P" ) {
 
@@ -38,8 +37,11 @@ const STORAGE_LIBR_KEY2 = addToQueBtn.id;
    }
   }
       function onCloseBtn(e) {
+        const card =  document.getElementById(e.target.parentNode.parentNode.id);
           if (document.title === 'Page Queue' && document.querySelector('[data-watched]').classList.contains(buttonIsOnClassName) && document.querySelector('#queue').classList.contains(buttonIsOnClassName)|| document.title === 'Page Queue' && document.querySelector('[data-queue]').classList.contains(buttonIsOnClassName) && document.querySelector('#watched').classList.contains(buttonIsOnClassName) || document.title === 'Page Queue' && document.querySelector('[data-watched]').classList.contains(buttonIsOnClassName) && ! document.querySelector('#watched').classList.contains(buttonIsOnClassName) || document.title === 'Page Queue' && document.querySelector('[data-queue]').classList.contains(buttonIsOnClassName) && ! document.querySelector('#queue').classList.contains(buttonIsOnClassName)){
-            document.getElementById(e.target.parentNode.parentNode.id).remove();
+           setTimeout(() => {
+            card.remove();
+           }, 700);
 
            }
          refs.body.classList.remove('no-scroll');
@@ -71,4 +73,5 @@ function sortedTargetElement (e) {
   
   }
 }
+
 
