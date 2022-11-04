@@ -1,25 +1,25 @@
 export const options = {
-  width: '393px',
+  width: 'auto',
   position: 'center-top',
   distance: '',
   fontFamily: 'Roboto',
   fontSize: '14px',
-  timeout: 2000,
-  useIcon: false,
+  timeout: 3500,
+  useIcon: true,
   cssAnimation: false,
   showOnlyTheLastOne: true,
 
   success: {
-    background: 'transparent',
-    textColor: '#FF6B08',
+    background: '#17bb01',
+    textColor: '#000000',
   },
   failure: {
-    background: 'transparent',
-    textColor: '#FF001B',
+    background: '#d80606',
+    textColor: '#000000',
   },
   warning: {
-    background: 'transparent',
-    textColor: '#E9DF02',
+    background: 'red',
+    textColor: 'black',
   },
   info: {
     background: 'transparent',
