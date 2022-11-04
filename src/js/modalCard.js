@@ -48,8 +48,19 @@ export async function showCard(e) {
     addTWtchBtn.addEventListener('click', toggleToWatched);
     addToQueBtn.addEventListener('click', toggleToQueue);
     window.addEventListener('keydown', closeModalHandler);
+    refs.backdrop.addEventListener('click', ClickCheck);
   }
 }
+
+function ClickCheck(e) {
+  if (e.target !== e.currentTarget) {
+    return;
+  }
+  onCloseBtn(e);
+
+  return;
+}
+
 function onCloseBtn(e) {
   const card = document.getElementById(e.target.parentNode.parentNode.id);
   if (
@@ -110,7 +121,7 @@ function sortedTargetElement(e) {
 function closeModalHandler(e) {
   if (e.code === 'Escape') {
     refs.backdrop.classList.add('is-hidden');
-    refs.body.classList.add('no-scroll');
+    refs.body.classList.remove('no-scroll');
     window.removeEventListener('keydown', closeModalHandler);
   }
 }

@@ -1,81 +1,82 @@
 .scroll-btn {
-    position: fixed;
-    padding: 0;
-    bottom: 100px;
-    right: 50px;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+  position: fixed;
+  padding: 0;
+  bottom: 100px;
+  right: 50px;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  border: none;
 
-    animation-name: up;
-    animation-duration: 1000ms;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+  animation-name: up;
+  animation-duration: 1000ms;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  transition: fill 3000ms;
 
-
-    @keyframes up {
-        0% {
-            transform: translateY(0);
-        }
-
-        50% {
-            transform: translateY(-10px);
-        }
-
-        100% {
-            transform: translateY(0);
-        }
+  @keyframes up {
+    0% {
+      transform: translateY(0);
     }
 
-    @include mobile {
-        width: 30px;
-        height: 30px;
-        right: 30px;
-        bottom: 50px;
+    50% {
+      transform: translateY(-10px);
     }
 
-    @include tablet {
-        width: 40px;
-        height: 40px;
-        bottom: 70px;
+    100% {
+      transform: translateY(0);
     }
+  }
 
-    z-index: 1;
-    background-color: #ff6b08;
-    color: #ff6b08;
-    transition: color 300ms ease-in-out;
+  @include mobile {
+    width: 30px;
+    height: 30px;
+    right: 30px;
+    bottom: 50px;
+  }
+
+  @include tablet {
+    width: 40px;
+    height: 40px;
+    bottom: 70px;
+  }
+
+  z-index: 1;
+  background-color: #ff6b08;
+  color: #ff6b08;
+  transition: color 300ms ease-in-out;
+
+  box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
+  -webkit-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
+  -moz-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
+
+  &:hover {
+    background-color: #ffffff;
+
+    .scroll-img {
+      fill: #ff6b08;
+    }
 
     box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
     -webkit-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
     -moz-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
+  }
 
-    &:hover {
-        background-color: #FFFFFF;
-
-        .scroll-img {
-            fill: #ff6b08;
-        }
-
-        box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
-        -webkit-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
-        -moz-box-shadow: 8px 7px 7px -2px rgba(0, 0, 0, 0.49);
+  &:active {
+    .scroll-img {
+      fill: #ff6b08;
     }
 
-    &:active {
-        .scroll-img {
-            fill: #ff6b08;
-        }
-
-        transform: translateY(-1px);
-        box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
-        -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
-        -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
-    }
+    transform: translateY(-1px);
+    box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+    -webkit-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+    -moz-box-shadow: 6px 9px 22px -1px rgba(0, 0, 0, 0.73);
+  }
 }
 
 .scroll-img {
-    fill: #FFFFFF;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
+  fill: #ffffff;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
 }
