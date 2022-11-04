@@ -2,7 +2,7 @@ import ThemoviedbAPI from './themoviedbAPI';
 import { createMarkup } from './galleryMarkup';
 import { refs } from './refs';
 import initPage from './initPage';
-// import { options } from 'options-notiflix';
+import { options } from './options_notiflix';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { renderPaginationOnSearch } from './paginationRequests';
@@ -18,7 +18,7 @@ async function onFormSubmit(evt) {
     .toLowerCase();
 
   if (searchQuery === '') {
-    Notify.failure('Enter a search query!');
+    Notify.failure('Enter a search query!', options);
     return;
   }
 
@@ -27,7 +27,8 @@ async function onFormSubmit(evt) {
     const searchFilms = await filmsApi.getMovieByName();
     if (searchFilms.total_results !== 0) {
       Notify.success(
-        `We found ${searchFilms.total_results} movies for your query`
+        `We found ${searchFilms.total_results} movies for your query`,
+        options
       );
       refs.galleryItem.innerHTML = '';
       createMarkup(searchFilms);
@@ -35,7 +36,8 @@ async function onFormSubmit(evt) {
       refs.searchFormRef.reset();
     } else if (searchFilms.total_results === 0) {
       Notify.failure(
-        'Sorry, there are no movies matching your search query. Please try again.'
+        'Sorry, there are no movies matching your search query. Please try again.',
+        options
       );
       initPage();
     }
@@ -43,7 +45,8 @@ async function onFormSubmit(evt) {
       svgSize: '150px',
     });
   } catch (error) {
-    Notify.failure('Something went wrong! Please retry');
+    Notify.failure('Something went wrong! Please retry', options);
   }
   Loading.remove();
 }
+
