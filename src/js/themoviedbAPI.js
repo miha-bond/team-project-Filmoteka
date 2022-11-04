@@ -14,19 +14,18 @@ export default class ThemoviedbAPI {
       include_adult: false,
     },
   };
-  
+
   #perPage = 20;
+  #genreId = '';
 
   async getTrendingMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
-      this.#page}`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${this.#page}`;
     const { data } = await axios.get(urlAXIOS);
     return data;
   }
 
   async getPopularMovies() {
-    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${
-      this.#page}`;
+    const urlAXIOS = `trending/movie/day?api_key=${KEY}&page=${this.#page}`;
     const { data } = await axios.get(urlAXIOS);
     return data;
   }
@@ -46,11 +45,21 @@ export default class ThemoviedbAPI {
   async getTrailer(id) {
     const urlAXIOS = `movie/${id}/videos?api_key=${KEY}&language=en-US`;
     const { data } = await axios.get(urlAXIOS);
-    return data;
+    return data.results[0].key;
   }
 
   async getUpcomingMovies() {
     const urlAXIOS = `movie/upcoming?api_key=${KEY}&language=en-US&page=${
+      this.#page
+    }`;
+    const { data } = await axios.get(urlAXIOS);
+    return data;
+  }
+
+  async getMoviebyGenre() {
+    const urlAXIOS = `/discover/movie?with_genres=${
+      this.#genreId
+    }&sort_by=vote_average.desc&api_key=${KEY}&language=en-US&page=${
       this.#page
     }`;
     const { data } = await axios.get(urlAXIOS);
@@ -71,6 +80,15 @@ export default class ThemoviedbAPI {
   set page(newPage) {
     this.#page = newPage;
   }
+
+  get genreId() {
+    return this.#genreId;
+  }
+
+  set genreId(newGenreId) {
+    this.#genreId = newGenreId;
+  }
+
   get perPage() {
     return this.#perPage;
   }
@@ -86,4 +104,4 @@ export default class ThemoviedbAPI {
   resetPage() {
     this.#page = 1;
   }
- }
+}

@@ -1,7 +1,18 @@
+import ThemoviedbAPI from './themoviedbAPI';
+
 import iconURL from '../img/symbol-defs.svg';
-// import { getGenresByIds } from './galleryMarkup';
+import { save } from './storage';
+
 import { refs } from './refs';
 import { genres } from './ganresId';
+const API = new ThemoviedbAPI();
+async function key(id) {
+  const keyFilms1 = await API.getTrailer(id).then(keyFilm => keyFilm);
+  save('wotchTrailer', keyFilms1);
+}
+
+
+//  !!!!!! ШО  ЗА ХРІНЬЬЬ!!
 
 // Функція для рендеру модального вікна
 export function renderModal({
@@ -15,8 +26,11 @@ export function renderModal({
   overview,
   name,
   original_name,
+  id,
 }) {
   let genresForModal = getGenresByIds(genre_ids);
+
+  key(id);
   let poster = getPoster(poster_path);
 
   // перевірка на наявність жанрів
@@ -24,15 +38,18 @@ export function renderModal({
     genresForModal = 'not available';
   }
 
-  const markup = /*html*/ `<div class="modal">
+  const markup = /*html*/ `<div class="modal" id="${id}">
                         <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="25px" height="25px">
                             <use href="${iconURL}#icon-close_menu"></use>
                             </svg>
                         </button>
-                        <div class="modal__image-thumb">
+                        <div class="modal__image-thumb trailer__wrap">
                         <img class="modal__image" src="${poster}" alt="${title} poster">
-                        </div>
+                        
+                        <a href="https://youtu.be/hf8EYbVxtCY" class="modal__btn trailer__btn card__link link tube">Watch <br> trailer </br> </a>
+                      
+                        </div>    
                         <div class="modal__info-thumb">
                         <h2 class="modal__title">${
                           name || original_title || original_name
@@ -63,7 +80,7 @@ export function renderModal({
                         </table>
                 
                         <h3 class="modal__about">About</h3>
-                        <p class="modal__about-text">${overview}</p>
+                        <article class="modal__about-text movie-review">${overview}</article>
                         <div class="modal__btn-container">
                         <button id="watched" type="button" class="modal__btn modal__btn-watched">add to Watched</button>
                         <button id="queue" type="button" class="modal__btn modal__btn-queue">add to queue</button>

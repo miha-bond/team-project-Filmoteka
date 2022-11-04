@@ -1,26 +1,88 @@
-import { save, remove } from './storage';
+import { save, load } from './storage';
+import { buttonIsOnClassName } from './modalCard';
 
- export function localStorageInitPage(arr) {
-      const C_R = 'current response';
-      if (localStorage.length !== 0) {
-    remove(C_R);
-     }
-      
-        save(C_R, JSON.stringify(arr));
-    }
+export function initStorage(key, id, el) {
+  const stD = load(key);
+  if (!stD) {
+    save(key, []);
+  } else if (isIn(stD, id)) {
+    el.classList.add(buttonIsOnClassName);
+    el.textContent = isRemoveBtnTxtData(key);
+  }
+}
 
-    
+export function toggleToWatched(e) {
+  const elementId = e.target.parentNode.parentNode.parentNode.id;
+  const KEYWORD = e.target.id;
+  const KEYWORD_SIBLING = e.target.nextElementSibling.id;
+  let watched = load(KEYWORD);
+  let queue = load(KEYWORD_SIBLING);
 
-   export function LocalStorageDataSave (arr, currentPage) {
-      const currentKey = `${currentPage} response`;
-    if (!load(currentKey)) {
-save(currentKey, JSON.stringify(arr))
-    } return
+  if (!isIn(watched, elementId)) {
+    e.target.classList.add(buttonIsOnClassName);
+    e.target.textContent = isRemoveBtnTxtData(KEYWORD);
+    watched.push(elementId);
+    if (isIn(queue, elementId)) {
+      e.target.nextElementSibling.classList.remove(buttonIsOnClassName);
+      e.target.nextElementSibling.textContent =
+        noAddBtnTxtData(KEYWORD_SIBLING);
+      queue.pop(elementId);
+      save(KEYWORD_SIBLING, queue);
     }
+    save(KEYWORD, watched);
+    return;
+  } else {
+    e.target.textContent = noAddBtnTxtData(KEYWORD);
+    e.target.classList.remove(buttonIsOnClassName);
+    watched.pop(elementId);
+    save(KEYWORD, watched);
+  }
+}
 
-    export function localStorageClear () {
-    let keys = Object.keys(localStorage);
-    for(let key of keys) {
-      localStorage.remove(`${key}`);
+export function toggleToQueue(e) {
+  const elementId = e.target.parentNode.parentNode.parentNode.id;
+  const KEYWORD_SIBLING = e.target.previousElementSibling.id;
+  const KEYWORD = e.target.id;
+  let watched = load(KEYWORD_SIBLING);
+  let queue = load(KEYWORD);
+
+  if (!isIn(queue, elementId)) {
+    e.target.classList.add(buttonIsOnClassName);
+    e.target.textContent = isRemoveBtnTxtData(KEYWORD);
+    queue.push(elementId);
+    if (isIn(watched, elementId)) {
+      e.target.previousElementSibling.classList.remove(buttonIsOnClassName);
+      e.target.previousElementSibling.textContent =
+        noAddBtnTxtData(KEYWORD_SIBLING);
+      watched.pop(elementId);
+      save(KEYWORD_SIBLING, watched);
     }
-    }
+    save(KEYWORD, queue);
+    return;
+  } else {
+    e.target.textContent = noAddBtnTxtData(KEYWORD);
+    e.target.classList.remove(buttonIsOnClassName);
+    queue.pop(elementId);
+    save(KEYWORD, queue);
+  }
+}
+
+function isRemoveBtnTxtData(value) {
+  const valValue = value.toUpperCase();
+  let text = 'remove from';
+  text = text.toUpperCase();
+  text = `${text} ${valValue}`;
+  return text;
+}
+
+function noAddBtnTxtData(value) {
+  const valValue = value.toUpperCase();
+  let text = 'add to';
+  text = text.toUpperCase();
+  text = `${text} ${valValue}`;
+  return text;
+}
+
+function isIn(arr, el) {
+  return arr.includes(el);
+}
