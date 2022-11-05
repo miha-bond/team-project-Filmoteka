@@ -3,10 +3,14 @@ import { genres } from './ganresId';
 import { save } from './storage';
 import { showCard } from './modalCard';
 
-function createMarkup({ results }) {
+ function createMarkup({ results }, el) {
   save('currentPage', results);
-  results.map(createMarkupElement);
-  refs.galleryItem.addEventListener('click', showCard);
+  results.map((res) => {
+    createMarkupElement(res, el);
+  })
+   
+ 
+  
 }
 
 function createMarkupElement({
@@ -15,7 +19,7 @@ function createMarkupElement({
   genre_ids,
   release_date,
   id,
-}) {
+}, el) {
   const genres = getGenresByIds(genre_ids);
   const date = new Date(release_date);
   const releaseDate = date.getFullYear();
@@ -30,7 +34,7 @@ function createMarkupElement({
     </div>
 </div>
 </li>`;
-  refs.galleryItem.insertAdjacentHTML('beforeend', markupString);
+  el.insertAdjacentHTML('beforeend', markupString);
 }
 
 function getGenresByIds(ids) {

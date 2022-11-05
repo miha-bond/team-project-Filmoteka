@@ -1,5 +1,6 @@
 import ThemoviedbAPI from './themoviedbAPI';
 import { createMarkup } from './galleryMarkup';
+import { showCard } from './modalCard';
 import { refs } from './refs';
 import initPage from './initPage';
 import { options } from './options-notiflix';
@@ -33,7 +34,8 @@ async function onFormSubmit(evt) {
         options
       );
       refs.galleryItem.innerHTML = '';
-      createMarkup(searchFilms);
+      createMarkup(searchFilms, refs.galleryItem);
+      refs.galleryItem.addEventListener('click', showCard);
       renderPaginationOnSearch(filmsApi.page, filmsApi.query);
       refs.searchFormRef.reset();
     } else if (searchFilms.total_results === 0) {

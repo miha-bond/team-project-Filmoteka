@@ -17,6 +17,7 @@ export function renderMoviebyGenre() {
 async function main() {
   const movieByGenre = await API.getMoviebyGenre();
   refs.galleryItem.innerHTML = '';
-  createMarkup(movieByGenre);
+  createMarkup(movieByGenre, refs.galleryItem);
+  refs.galleryItem.addEventListener('click', showCard);
   renderPaginationOngenreId(API.page, API.genreId);
 }

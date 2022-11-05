@@ -27,7 +27,7 @@ export function renderModal({
   name,
   original_name,
   id,
-}) {
+},) {
   let genresForModal = getGenresByIds(genre_ids);
 
   key(id);
@@ -38,7 +38,7 @@ export function renderModal({
     genresForModal = 'not available';
   }
 
-  const markup = /*html*/ `<div class="modal" id="${id}">
+  return `<div class="modal" id="${id}">
                         <button type="button" class="modal__btn-close" data-modal-close>
                             <svg class="modal__icon-close" width="25px" height="25px">
                             <use href="${iconURL}#icon-close_menu"></use>
@@ -87,7 +87,7 @@ export function renderModal({
                         </div>
                         </div>
                     </div>`;
-  refs.backdrop.innerHTML = markup;
+ 
 }
 
 //Функція для заміни постера у випадку його відсутності
