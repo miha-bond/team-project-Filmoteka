@@ -1,16 +1,17 @@
  import { Notify } from 'notiflix';
  import { save, load } from './storage';
-import { createMarkupElement } from './galleryMarkup';
+import { createMarkup, createMarkupElement } from './galleryMarkup';
 import { refs } from './refs';
 
 
-export function initStorage (key, id, el) {
-  
-isInStorageInspector(key);
-if(load(key).includes((id))){
-el.classList.add('is-on');
-el.textContent =  isRemoveBtnTxtData(key);
+export function initStorage (key, id) {
+  let text = 'remove from';
+  let d = key.toLowerCase();
+if(finded(key, id)){
+  document.querySelector(`#${key}`).classList.add('is-on');
+document.querySelector(`#${key}`).textContent =  `${text} ${d}`;
   }
+  isInStorageInspector(key, id);
 }
 
 export function isInStorageInspector (key) {
@@ -18,217 +19,124 @@ export function isInStorageInspector (key) {
     save(key, []);
       } 
 
-
-
-}export function toggleToWatched (e) {
- 
-  const elementId = Number(e.target.parentNode.parentNode.parentNode.id);
-    const KEYWORD = e.target.id;
-    const KEYWORD_SIBLING = e.target.nextElementSibling.id;
-    let watched = load(KEYWORD);
-    let queue = load(KEYWORD_SIBLING);
-    e.target.classList.toggle('is-on');
-    if(e.target.textContent = isRemoveBtnTxtData(KEYWORD)) {
-      e.target.textContent = isRemoveBtnTxtData(KEYWORD_SIBLING);
     }
-    e.target.textContent = isRemoveBtnTxtData(KEYWORD);
 
-     if(watched.includes(elementId)) {
-  watched.pop(elementId);
-      save (KEYWORD, watched);
-   return
-     } else {
-   
-    e.target.textContent = isRemoveBtnTxtData(KEYWORD);
-  watched.push(elementId);
-    save(KEYWORD, watched);
-if(queue.includes(elementId)) {
-      e.target.nextElementSibling.classList.remove('is-on');
-      e.target.nextElementSibling.textContent = noAddBtnTxtData(KEYWORD_SIBLING);
-      queue.pop(elementId);
-      save(KEYWORD_SIBLING, queue);
-      } 
-    } return
-  }
-
-  export function toggleToWatchedLb (e) {
- 
-    const elementId = Number(e.target.parentNode.parentNode.parentNode.id);
-      const KEYWORD = e.target.id;
-      const KEYWORD_SIBLING = e.target.nextElementSibling.id;
-      let watched = load(KEYWORD);
-      let queue = load(KEYWORD_SIBLING);
-      e.target.classList.toggle('is-on');
-      if(e.target.textContent = isRemoveBtnTxtData(KEYWORD)) {
-        e.target.textContent = isRemoveBtnTxtData(KEYWORD_SIBLING);
+    export function finded (key, elId) {
+      if (load(key) && load(key).length !== 0) {
+        return load(key).find(e => e.id === elId);
       }
-      e.target.textContent = isRemoveBtnTxtData(KEYWORD);
-       if(watched.includes(elementId)) {
-        
-         watched.pop(elementId);
-        save (KEYWORD, watched);
-        document.getElementById(elementId.toString()).remove();
-        if (load('watched').length === 0 && load('queue').length === 0) {
-         document.querySelector('.modal__icon-close').dispatchEvent(new MouseEvent('click'));
-     itsNotMovies();
-         
-        }
-        if (load('watched').length === 0 && load('queue').length !==0) {
-         document.querySelector('[data-watched]').classList.remove('is-on');
-     document.querySelector('[data-watched]').disabled = true;
-         document.querySelector('[data-queue]').dispatchEvent(new MouseEvent('click'));
-        }
-       return
-     } else {
-      
-    watched.push(elementId);
-      save(KEYWORD, watched);
-      if(load('watched').length === 1) {
-        document.querySelector('[data-watched]').disabled = false;
-      } 
-      if (! load('queue').includes(elementId)) {
-        createMarkupElement(load('currentPage').find(el => Number(el.id) === elementId), refs.galleryItemsL);
-    } 
-      if(queue.includes(elementId)) {
-        e.target.nextElementSibling.classList.remove('is-on');
-        e.target.nextElementSibling.textContent = noAddBtnTxtData(KEYWORD_SIBLING);
-        queue.pop(elementId);
-        save(KEYWORD_SIBLING, queue);
-        if (load('queue').length === 0) {
-          document.querySelector('[data-queue]').classList.remove('is-on');
-         document.querySelector('[data-queue]').disabled = true;
-          document.querySelector('[data-watched]').dispatchEvent(new MouseEvent('click'));
-  
-        }
-      } 
-    return
       }
-    }
-    
-
-export function toggleToQueue (e) {
+export function toggleTo (e) {
  const elementId = Number(e.target.parentNode.parentNode.parentNode.id);
- const KEYWORD_SIBLING = e.target.previousElementSibling.id;
+ const keyword2 = toDetermine(e);
  const  KEYWORD  = e.target.id;
- let watched = load(KEYWORD_SIBLING);
- let queue = load(KEYWORD);
+ const dataS1 = [...load(KEYWORD)];
+ const dataS2 = [...load(keyword2)];
+ const findElement = finded('currentPage', elementId);
+const params = {
+   findElement,
+dataS1,
+dataS2,
+KEYWORD,
+ keyword2,
+ elementId,
+}
  e.target.classList.toggle('is-on');
- if(e.target.textContent = isRemoveBtnTxtData(KEYWORD)) {
-   e.target.textContent = isRemoveBtnTxtData(KEYWORD_SIBLING);
- }
- e.target.textContent = isRemoveBtnTxtData(KEYWORD);
- if(queue.includes(elementId)) {
-queue.pop(elementId);
- save (KEYWORD, queue);
+e.target.textContent = changeBtnText(KEYWORD, e.target.textContent);
+ if(! finded(KEYWORD, elementId) || dataS1.length === 0){
+  ifNotIncludes(params);
  return
- } else {
-  queue.push(elementId);
-  save(KEYWORD, queue);
-if(watched.includes(elementId)) {
-    e.target.previousElementSibling.classList.remove('is-on');
-    e.target.previousElementSibling.textContent = noAddBtnTxtData(KEYWORD_SIBLING);
-    watched.pop(elementId)
-    save(KEYWORD_SIBLING, watched);
-  }
-  return
+} else {
+ ifIncludes(params);
+
 } 
  }
-
-
-export function toggleToQueueLb (e) {
+ export function toggleToLb (e) {
   const elementId = Number(e.target.parentNode.parentNode.parentNode.id);
-  const KEYWORD_SIBLING = e.target.previousElementSibling.id;
+  const keyword2 = toDetermine(e);
   const  KEYWORD  = e.target.id;
-  let watched = load(KEYWORD_SIBLING);
-  let queue = load(KEYWORD);
-
-  e.target.classList.toggle('is-on');
-  if(e.target.textContent = isRemoveBtnTxtData(KEYWORD)) {
-    e.target.textContent = isRemoveBtnTxtData(KEYWORD_SIBLING);
-  }
-  e.target.textContent = isRemoveBtnTxtData(KEYWORD);
-  if(queue.includes(elementId)) {
-   queue.pop(elementId);
-  save (KEYWORD, queue);
-  document.getElementById(elementId.toString()).remove();
-  if (load('queue').length === 0 && load('watched').length === 0) {
-   document.querySelector('.modal__icon-close').dispatchEvent(new MouseEvent('click'));
-   itsNotMovies();
- 
+  const dataS1 = [...load(KEYWORD)];
+  const dataS2 = [...load(keyword2)];
+  const data = [...dataS1, ...dataS2];
+  const findElement = findedLb(data, elementId);
+ const params = {
+  findElement,
+  dataS1,
+dataS2,
+KEYWORD,
+ keyword2,
+ elementId,
  }
- if (load('queue').length === 0 && load('watched').length !== 0){
-     document.querySelector('[data-queue]').classList.remove('is-on');
-     document.querySelector('[data-queue]').disabled = true;
-    document.querySelector('[data-watched]').dispatchEvent(new MouseEvent('click'));
-   } 
- return
+ e.target.classList.toggle('is-on');
+ e.target.textContent = changeBtnText(KEYWORD, e.target.textContent);
+
+ let findElLb1 = finded(KEYWORD, elementId);
+  if(! findElLb1 || dataS1.length === 0){
+   ifNotIncludes(params);
+   findElLb1 = finded(KEYWORD, elementId)
+   document.getElementById(elementId.toString()).remove();
+   createMarkupElement(findElLb1, refs.galleryItemsL);
+document.querySelector(`[data-${KEYWORD}]`).disabled = false;
   } else {
-   queue.push(elementId);
-   save(KEYWORD, queue);
-  if(load('queue').length === 1 ) {
-     document.querySelector('[data-queue]').disabled = false;
-    } 
-   if ( ! load('watched').includes(elementId)) {
-     createMarkupElement(load('currentPage').find(el => Number(el.id) === elementId));
-     return
-     }
- if(watched.includes(elementId)) {
-     e.target.previousElementSibling.classList.remove('is-on');
-     e.target.previousElementSibling.textContent = noAddBtnTxtData(KEYWORD_SIBLING);
-     watched.pop(elementId)
-     save(KEYWORD_SIBLING, watched);
-     if (load('watched').length === 0 &&  load('queue').length !==0) {
-       document.querySelector('[data-watched]').classList.remove('is-on');
-       document.querySelector('[data-watched]').disabled = true;
-       document.querySelector('[data-queue]').dispatchEvent(new MouseEvent('click'));
-      } 
-      }
-   return
-     } 
+  ifIncludes(params);
   
-  
- }
+  if(finded(KEYWORD, elementId)) {
+
+  }
+  if (load(KEYWORD).length === 0 && load(keyword2).length === 0) {
+    itsNotMovies();
+  }else if (load(KEYWORD).length === 0 && load(keyword2).length !== 0){
+    document.querySelector(`[data-${KEYWORD}]`).classList.remove('is-on');
+    document.querySelector(`[data-${KEYWORD}]`).disabled = true;
+    document.querySelector(`[data-${keyword2}]`).disabled = false;
+    document.querySelector(`[data-${keyword2}]`).classList.add('is-on');
+    refs.galleryItemsL.innerHTML = '';
+    let dataLB = [...load(keyword2)];
+    dataLB.map(el => createMarkupElement(el, refs.galleryItemsL));
+    
+   
+  }document.getElementById(elementId.toString()).remove();
+  e.target.parentNode.parentNode.parentNode.removeEventListener('click', modalListener);
+  refs.body.classList.toggle('no-scroll');
+  refs.backdrop.classList.toggle('is-hidden');
+  window.removeEventListener('keydown', closeModalHandler);
+
+  return
+   } 
  
+}
+  
+ function  changeBtnText (value, textCont) {
+  let text = textCont.toLowerCase();
+  let text1 = 'add to';
+  let text2 = 'remove from';
 
-
- function  isRemoveBtnTxtData (value) {
-const valValue = value.toUpperCase();
-let text = 'remove from';
-text = text.toUpperCase();
-text = `${text} ${valValue}`;
-return text;
+if (text.includes(text2)) {
+ return `${text1} ${value}`;
+} 
+return `${text2} ${value}`;
 }
 
-
-function  noAddBtnTxtData (value) {
-const valValue = value.toUpperCase();
-let text = 'add to';
-text = text.toUpperCase();
-text = `${text} ${valValue}`;
-return text;
-}
 
 export function modalListener (e) {
-    if(e.currentTarget.parentNode.id === 'bH'
-    && e.target.id === 'watched'){
-      toggleToWatched(e);
-    } else if(e.currentTarget.parentNode.id === 'bH' &&
-    e.target.id === 'queue') {
-      toggleToQueue(e);
-    } else if(e.currentTarget.parentNode.id === 'bL'
-    && e.target.id === 'watched') {
-      toggleToWatchedLb(e);
-    } else if(e.currentTarget.parentNode.id === 'bL' &&
-    e.target.id === 'queue') {
-      toggleToQueueLb(e);
-    } else if(e.currentTarget.childNodes[1].firstElementChild === e.target ||
-      e.currentTarget.childNodes[1].firstElementChild.firstElementChild === e.target){
-onCloseBtn(e);
-    } else {
+    if(e.currentTarget.parentNode.id === 'bH' && 
+    e.target.id === 'watched' ||
+    e.currentTarget.parentNode.id === 'bH'&&
+    e.target.id === 'queue'){
+      toggleTo(e);
       return
+    }else if(e.currentTarget.parentNode.id === 'bL'&&
+    e.target.id === 'watched' ||
+    e.currentTarget.parentNode.id === 'bL'&&
+    e.target.id === 'queue') {
+      toggleToLb(e);
+      return
+    } else if(e.target.nodeName === 'svg' ||
+    e.target.nodeName === 'use'){
+onCloseBtn(e);
+return
     }
-  
-   }
+  }
 
 
    function onCloseBtn(e) {
@@ -250,12 +158,8 @@ onCloseBtn(e);
 
 
      function itsNotMovies (){
- 
-    
-       document.querySelector('#data-href').dispatchEvent(new MouseEvent('click'));
-
-  
-      setTimeout(() => {
+ document.querySelector('#data-href').dispatchEvent(new MouseEvent('click'));
+ setTimeout(() => {
         Notify.failure('Add movie to library!',  {
           position: 'center-center',
           width: '57vw',
@@ -271,3 +175,63 @@ onCloseBtn(e);
   return
   }
     
+
+
+function ifIncludes ({findElement, dataS1, KEYWORD}) {
+  dataS1.pop(findElement);
+  save(KEYWORD, dataS1);
+}
+
+function ifNotIncludes ({ 
+  findElement,
+  dataS1,
+  dataS2,
+  KEYWORD,
+  keyword2,
+  elementId,
+   }) {
+  
+  dataS1.push(findElement);
+  save (KEYWORD, dataS1);
+  if (finded(keyword2, elementId)) {
+    ifSbincl ({ 
+      findElement,
+      dataS2,
+      keyword2,
+       })
+  }
+  return 
+}
+
+function ifSbincl ({ 
+  findElement,
+  dataS2,
+  keyword2,
+   }) {
+  document.querySelector(`#${keyword2}`).classList.remove('is-on');
+const curBtnText = document.querySelector(`#${keyword2}`).textContent;
+document.querySelector(`#${keyword2}`).textContent = changeBtnText(keyword2, curBtnText);
+dataS2.pop(findElement)
+save(keyword2, dataS2);
+}
+
+
+function toDetermine (e) {
+  let id1 = 'watched';
+  let id2 = 'queue';
+if(e.target.id === 'watched') {
+  return  id2;
+}
+  if (e.target.id === 'queue') {
+    return id1;
+  }
+}
+
+  
+ function findedLb (arr, elId) {
+  
+    if (arr.length !== 0) {
+      return arr.find(e => e.id === elId);
+    }
+    }
+ 

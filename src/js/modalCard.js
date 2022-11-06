@@ -38,13 +38,11 @@ const addTWtchBtn = document.querySelector('#watched');
     const STORAGE_LIBR_KEY2 = addToQueBtn.id;
      initStorage(
        STORAGE_LIBR_KEY1,
-       selectedCardId,
-       document.querySelector('#watched')
+       selectedCardId
      );
      initStorage(
        STORAGE_LIBR_KEY2,
-       selectedCardId,
-       document.querySelector('#queue')
+       selectedCardId
      );
 
 

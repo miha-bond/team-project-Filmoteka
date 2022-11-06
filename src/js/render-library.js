@@ -3,118 +3,100 @@ import { refs } from "./refs";
 import { load } from "./storage";
 import { createMarkupElement} from "./galleryMarkup";
  import {showCard} from "./modalCard";
+ import{finded} from "./storage-proceccing";
+
+ notMovies();
+ initLibrary (); 
 
 
-    resetLibrary('watched', 'queue');
-  
 
 
+function view (e) {
 
+     if(e.target.nodeName === 'BUTTON'){
+         let currentKey = e.target.textContent;
+         currentKey = currentKey.toLowerCase();
+           let queStorageData = load(`${currentKey}`);
+           let currentAtrSblBtn =  deter(e);
 
-function viewQue () {
-    let currentP = load('currentPage');
-  let queStorageData = load('queue');
-       refs.queBtn.classList.add('is-on');
-       if(refs.watcLbBtn.classList.contains('is-on')) {
-        refs.watcLbBtn.classList.remove('is-on')
-       }
-        queStorageData = queStorageData.map(el => Number(el));
-        currentP =
-        currentP.filter(el => queStorageData.includes(el.id));
-        refs.galleryItemsL.innerHTML = '';
-        currentP.map( el => createMarkupElement(el, refs.galleryItemsL));
-        refs.galleryItemsL.addEventListener('click', showCard)
+           
+                document.querySelector(`[data-${currentKey}]`).classList.toggle('is-on');
+                if( document.querySelector(`[data-${currentAtrSblBtn}]`).classList.contains('is-on')) {
+                    document.querySelector(`[data-${currentAtrSblBtn}]`).classList.remove('is-on');
+                   }
+               
+                refs.galleryItemsL.innerHTML = ''
+                 queStorageData = queStorageData.map(el => createMarkupElement(el, refs.galleryItemsL));
+                 refs.galleryItemsL.addEventListener('click', showCard)
+     }
+
         }
     
 
 
- function viewWt() {
-    let currentP = load('currentPage');
-    let watchedStorageData = load('watched');
-  refs.watcLbBtn.classList.add('is-on');
-  if(refs.queBtn.classList.contains('is-on')) {
-  refs.queBtn.classList.remove('is-on');
-} 
-    watchedStorageData = watchedStorageData.map(el => Number(el));
-    currentP =
-    currentP.filter(el => watchedStorageData.includes(el.id));
-    refs.galleryItemsL.innerHTML = '';
-    currentP.map( el => createMarkupElement(el, refs.galleryItemsL));
-    refs.galleryItemsL.addEventListener('click', showCard)
+ function deter(e) {
+    let text1 =  'watched';
+    let text2 = 'queue';
+if (e.target.textContent === 'watched'){
+    return text2;
+}
+if (e.target.textContent === 'queue'){
+    return text1;
+}
     } 
 
-
-
-function resetLibrary (v1, v2) {
-    const w = load(v1);
-    const q = load(v2);
-    if(! w && ! q || w === 0 && q === 0 || ! w && q === 0 || w === 0 && ! q  )  {
-        NotMovies();
-           }
-           initLibrary ();
-}
-
 function initLibrary () {
-    if (load('watched').length === 0 && load('queue').length === 0) {
-        NotMovies();
-    }
-    let currentP = load('currentPage');
-    libraryBtnDsbl ('watched', document.querySelector('[data-watched]'));
-    libraryBtnDsbl ('queue', document.querySelector('[data-queue]'));
-    
-            if( load('watched').length !==0 &&  load('queue').length === 0 || load('watched').length !==0 && ! load('queue')) {
-let library = load('watched');
-library = library.map(el => Number(el));
-library =  currentP.filter(el => library.includes(Number(el.id)));
-library.map(el => createMarkupElement(el, refs.galleryItemsL));
-refs.galleryItemsL.addEventListener('click', showCard);
-refs.watcLbBtn.addEventListener('click', viewWt);
-return
-} else if(load('queue').length !==0 && load('watched').length === 0 || load('queue').length !==0 && ! load('watched')) {
-    
-            document.querySelector('[data-watched]').disabled = true;
-            let library = load('queue')
-            library = library.map(el => Number(el));
-            library =  currentP.filter(el => library.includes(Number(el.id)));
-            library.map(el => createMarkupElement(el, refs.galleryItemsL));
-            refs.galleryItemsL.addEventListener('click', showCard);
-            refs.queBtn.addEventListener('click', viewQue);
-            return
-         } else {
+    const key1 = 'watched';
+    const key2 = 'queue';
+    const dataW = [...load(key1)];
+    const dataQ = [...load(key2)];
+
+    libraryBtnDsbl (dataW, key1);
+    libraryBtnDsbl (dataQ, key2);
+ let library = [...dataW, ... dataQ];
             
-            let library = [...load('watched'), ... load('queue')];
-            
-        currentP.filter(el => library.map(el =>Number(el)).includes(Number(el.id))).map(el => createMarkupElement(el, refs.galleryItemsL));
-        refs.galleryItemsL.addEventListener('click', showCard);
-        refs.watcLbBtn.addEventListener('click', viewWt);
-        refs.queBtn.addEventListener('click', viewQue);
-        return
-        }
+ library.map(el => createMarkupElement(el, refs.galleryItemsL));
+ refs.galleryItemsL.addEventListener('click', showCard);
+ refs.libraryButtons.addEventListener('click', view)
+ return
 }
 
 
-function libraryBtnDsbl (v, bt) { 
-    if (load(v).length === 0 ){
-        bt.disabled = true;
+function libraryBtnDsbl (v, k) { 
+    if (v.length === 0 ){
+       document.querySelector(`[data-${k}]`).disabled = true;
     }
 } 
 
-function NotMovies (){
-     
+function notMovies (){
+    if(! load('watched') && ! load('queue') ||
+    load('queue').length === 0 && load('watched').length === 0 ) {
+        Notify.failure('Add movie to library!',  {
+            width: '55vw',
+            fontSize: '75px',
+            fontFamily:'Verdana',
+            failure: {
+                background: '#000000dd',
+              textColor: '#ff0000',
+            }
+            })     
     document.querySelector('#data-href').dispatchEvent(new MouseEvent('click'));
-
-  
-    setTimeout(() => {
-      Notify.failure('Add movie to library!',  {
-        position: 'center-center',
-        width: '55vw',
-        fontSize: '75px',
-        fontFamily:'Verdana',
-        failure: {
-            background: '#000000dd',
-          textColor: '#ff0000',
-        }
-        })
-    }, 10)
+           }
+ 
 }
 
+// function render1 (key1, key2, fn) {
+//     if( load(`${key1}`).length !==0 &&  load(`${key2}`).length === 0 || load(`${key1}`).length !==0 && ! load(`${key2}`)) {
+//         const disBtn = document.querySelector(`[data-${key2}]`);
+//         disBtn.classList.remove('is-on');
+//        disBtn.disabled = true;
+//        let library = load(`${key1}`);
+//         library = library.map(el => Number(el));
+//         library =  currentP.filter(el => library.includes(Number(el.id)));
+//         library.map(el => createMarkupElement(el, refs.galleryItemsL));
+//         refs.galleryItemsL.addEventListener('click', showCard);
+//         refs.watcLbBtn.addEventListener('click', fn);
+//        return
+//         }
+//         return
+// }
