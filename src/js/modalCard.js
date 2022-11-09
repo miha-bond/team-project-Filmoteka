@@ -8,9 +8,6 @@ import {
   modalListener,
 } from './storage-proceccing';
 
-
-
-
 export function showCard(e) {
   e.preventDefault();
   
@@ -48,9 +45,6 @@ const addTWtchBtn = document.querySelector('#watched');
 
 }
  }
-
-
-
 function sortedTargetElement(e) {
   let element = null;
   if (e.target.nodeName === 'IMG') {

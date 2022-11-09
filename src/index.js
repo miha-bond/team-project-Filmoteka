@@ -8,5 +8,6 @@
  import './js/videotube';
  import './js/scroll-up-btn';
 import  './js/initPage';
+import './js/themeColor';
 
 

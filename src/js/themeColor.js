@@ -1,17 +1,46 @@
-const bodyRef = document.querySelector('body');
-const toggleRef = document.querySelector('#theme-switch-toggle');
-const footerDarktheme = document.querySelector('footer');
+import { load, save } from './storage';
 
-toggleRef.addEventListener('change', event => {
-  if (bodyRef.classList.contains('dark-theme')) {
-    bodyRef.classList.remove('dark-theme');
-    bodyRef.classList.add('light-theme');
-    footerDarktheme.classList.remove('dark-theme');
-  } else {
-    bodyRef.classList.remove('light-theme');
-    bodyRef.classList.add('dark-theme');
-    footerDarktheme.classList.add('dark-theme');
+const themeParams = {
+  key: 'theme',
+    light: 'light-theme',
+    dark: 'dark-theme',
+  };
+  
+  const bodyRef = document.querySelector('body');
+  const toggleRef = document.querySelector('#theme-switch-toggle');
+  const footerDarktheme = document.querySelector('footer');
+  initTheme(themeParams);
+
+  function initTheme ({key, light, dark}){
+ let dataTh = load(key);
+
+ if(! dataTh){
+  save(key, light);
+
+ } 
+if(dataTh === dark){
+    toggleRef.setAttribute('checked', true);
+bodyRef.classList.add(dark);
+    footerDarktheme.classList.add(dark);
+    save(key, dark);
   }
-});
+  toggleRef.addEventListener('change', toggleTheme);
+}
 
+function toggleTheme () {
+    let key = 'theme';
+    let light = 'light-theme';
+    let dark = 'dark-theme';
+    let value = load(key);
+   if (value === dark ){
+     save(key, light);
+     bodyRef.classList.toggle(dark);
+     footerDarktheme.classList.toggle(dark);
+     return
+    }
+    save(key, dark);
+    bodyRef.classList.toggle(dark);
+    footerDarktheme.classList.toggle(dark);
+    return
+   }
 export { bodyRef, toggleRef, footerDarktheme };

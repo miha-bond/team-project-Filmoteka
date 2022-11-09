@@ -3,7 +3,6 @@ import ThemoviedbAPI from './themoviedbAPI';
 import iconURL from '../img/symbol-defs.svg';
 import { save } from './storage';
 
-import { refs } from './refs';
 import { genres } from './ganresId';
 const API = new ThemoviedbAPI();
 async function key(id) {
@@ -12,7 +11,6 @@ async function key(id) {
 }
 
 
-//  !!!!!! ШО  ЗА ХРІНЬЬЬ!!
 
 // Функція для рендеру модального вікна
 export function renderModal({

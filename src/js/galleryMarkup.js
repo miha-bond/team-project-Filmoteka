@@ -1,7 +1,5 @@
-import { refs } from './refs';
 import { genres } from './ganresId';
 import { save } from './storage';
-import { showCard } from './modalCard';
 
  function createMarkup({ results }, el) {
   save('currentPage', results);
